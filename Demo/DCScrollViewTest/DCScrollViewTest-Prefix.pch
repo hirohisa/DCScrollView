@@ -1,0 +1,16 @@
+//
+// Prefix header for all source files of the 'DCScrollViewTest' target in the 'DCScrollViewTest' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+#ifdef DEBUG
+# define DEBUG_LOG NSLog(@"%s", __func__)
+# define LOG(fmt, ...) NSLog((@"%s" fmt), __PRETTY_FUNCTION__, __VA_ARGS__)
+#else
+# define DEBUG_LOG ;
+# define LOG(...) ;
+#endif
