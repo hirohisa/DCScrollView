@@ -6,11 +6,3 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
-
-#ifdef DEBUG
-# define DEBUG_LOG NSLog(@"%s", __func__)
-# define LOG(fmt, ...) NSLog((@"%s" fmt), __PRETTY_FUNCTION__, __VA_ARGS__)
-#else
-# define DEBUG_LOG ;
-# define LOG(...) ;
-#endif

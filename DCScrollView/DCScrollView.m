@@ -173,8 +173,6 @@
         if (self.focusedCenter) {
             [self changeCellsWithHighlited:NO];
         }
-        //LOG(@"page %d, relatived %d, self %d", page, [self indexRelativedForIndex:page], self.page);
-        //LOG(@"scroll > page %d, relatived %d, diff:%d", page, [self indexRelativedForIndex:page], diff);
         if ([self.dataSource numberOfCellsInDCTitleScrollView:self] > 1) {
             CGFloat x = CGRectGetWidth(self.bounds) * diff;
             [self setContentOffset:CGPointMake(self.contentOffset.x + x, 0) animated:YES];
@@ -467,7 +465,6 @@
     }
 
     id currentCell = [self cellAtIndex:self.page];
-    NSLog(@"%s", __func__);
     self.currentCell = currentCell;
     self.currentCell.frame = (CGRect) {
         .origin = startPoint,
@@ -490,7 +487,6 @@
 
 - (void)adjustContents
 {
-    //NSLog(@"%s", __func__);
     NSInteger page = [self willedPage];
     // remove
     if (page == 0) {
