@@ -283,7 +283,12 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    // TODO need renderCells
+    if (scrollView.contentOffset.y) {
+        scrollView.contentOffset = (CGPoint) {
+            .x = scrollView.contentOffset.x,
+            .y = 0
+        };
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
