@@ -1,6 +1,5 @@
 //
 //  DCScrollView.m
-//  DCScrollView
 //
 //  Created by Hirohisa Kawasaki on 13/03/29.
 //  Copyright (c) 2013年 Hirohisa Kawasaki. All rights reserved.
@@ -9,82 +8,25 @@
 #import "DCScrollView.h"
 #import "DCScrollView+Logic.h"
 
-#pragma mark - DCTitleScrollViewCell
-
-@interface DCTitleScrollViewCell () {
-@private
-    NSNumber *_number;
-}
-@property (nonatomic) NSInteger index;
-@end
-
-@implementation DCTitleScrollViewCell
-
-#pragma mark - accessor
-
-- (void)setIndex:(NSInteger)index
-{
-    _number = @(index);
-}
-
-- (NSInteger)index
-{
-    if (_number) {
-        return [_number integerValue];
-    }
-    return NSNotFound;
-}
-
-- (void)setTextLabel:(UILabel *)textLabel
-{
-    _textLabel = textLabel;
-    [self addSubview:_textLabel];
-}
-
-- (void)setHighlighted:(BOOL)highlighted
-{
-    _highlighted = highlighted;
-    if (self.textLabel) {
-        self.textLabel.highlighted = highlighted;
-    }
-}
-
-- (void)dealloc
-{
-    _number = nil;
-    [_textLabel removeFromSuperview];
-    _textLabel = nil;
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    if (self.textLabel &&
-        [self.textLabel.text length] &&
-        CGSizeEqualToSize(self.textLabel.frame.size, CGSizeZero)) {
-        [self.textLabel sizeToFit];
-        self.textLabel.center = (CGPoint) {
-            .x = CGRectGetWidth(self.frame)/2,
-            .y = CGRectGetHeight(self.frame)/2
-        };
-    }
-}
-@end
-
 #pragma mark - DCTitleScrollView
 
 @class DCTitleScrollView;
+
 @protocol DCTitleScrollViewDelegate <NSObject>
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView;
+
 @end
 
 @protocol DCTitleScrollViewDataSource <NSObject>
+
 - (NSInteger)numberOfCellsInDCTitleScrollView:(DCTitleScrollView *)scrollView;
 - (DCTitleScrollViewCell *)dcTitleScrollView:(DCTitleScrollView *)scrollView cellAtIndex:(NSInteger)index;
+
 @end
 
 @interface DCTitleScrollView : UIScrollView <UIScrollViewDelegate>
+
 @property (nonatomic, assign) id<DCTitleScrollViewDelegate> dcDelegate;
 @property (nonatomic, assign) id<DCTitleScrollViewDataSource> dataSource;
 @property (nonatomic, strong) NSMutableArray *visibleCells;
@@ -93,6 +35,7 @@
 
 @property (nonatomic) BOOL touched;
 - (void)scrollToPage:(NSInteger)page animated:(BOOL)animated;
+
 @end
 
 @implementation DCTitleScrollView
@@ -286,48 +229,6 @@
     [self setContentOffset:CGPointMake(x, 0) animated:animated];
 }
 
-@end
-
-
-#pragma mark - DCScrollViewCell
-
-@interface DCScrollViewCell () {
-@private
-    NSNumber *_number;
-}
-@property (nonatomic) NSInteger index;
-@property (nonatomic) NSString *reuseIdentifier;
-@end
-
-@implementation DCScrollViewCell
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
-{
-    if(self = [super init]) {
-		self.reuseIdentifier = reuseIdentifier;
-	}
-	return self;
-}
-#pragma mark - accessor
-
-- (void)setIndex:(NSInteger)index
-{
-    _number = @(index);
-}
-
-- (NSInteger)index
-{
-    if (_number) {
-        return [_number integerValue];
-    }
-    return NSNotFound;
-}
-
-#pragma mark -
-- (void)dealloc
-{
-    _number = nil;
-    _reuseIdentifier = nil;
-}
 @end
 
 #pragma mark - DCBodyScrollView
