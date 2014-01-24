@@ -9,19 +9,22 @@
 #import "DCScrollView.h"
 #import "DCScrollView+Logic.h"
 
+#pragma mark - DCTitleScrollViewCell
+
 @interface DCTitleScrollViewCell () {
 @private
     NSNumber *_number;
 }
-@property (nonatomic, readonly) NSInteger index;
+@property (nonatomic) NSInteger index;
 @end
 
 @implementation DCTitleScrollViewCell
 
-#pragma mark - setter/getter
+#pragma mark - accessor
+
 - (void)setIndex:(NSInteger)index
 {
-    _number = [NSNumber numberWithInteger:index];
+    _number = @(index);
 }
 
 - (NSInteger)index
@@ -46,7 +49,6 @@
     }
 }
 
-#pragma mark -
 - (void)dealloc
 {
     _number = nil;
@@ -54,7 +56,6 @@
     _textLabel = nil;
 }
 
-#pragma mark -
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -70,43 +71,7 @@
 }
 @end
 
-@interface DCScrollViewCell () {
-@private
-    NSNumber *_number;
-}
-@property (nonatomic) NSInteger index;
-@property (nonatomic) NSString *reuseIdentifier;
-@end
-
-@implementation DCScrollViewCell
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
-{
-    if(self = [super init]) {
-		self.reuseIdentifier = reuseIdentifier;
-	}
-	return self;
-}
-#pragma mark - setter/getter
-- (void)setIndex:(NSInteger)index
-{
-    _number = [NSNumber numberWithInteger:index];
-}
-
-- (NSInteger)index
-{
-    if (_number) {
-        return [_number integerValue];
-    }
-    return NSNotFound;
-}
-
-#pragma mark -
-- (void)dealloc
-{
-    _number = nil;
-    _reuseIdentifier = nil;
-}
-@end
+#pragma mark - DCTitleScrollView
 
 @class DCTitleScrollView;
 @protocol DCTitleScrollViewDelegate <NSObject>
@@ -134,7 +99,8 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    if ((self = [super initWithFrame:frame]))
+    self = [super initWithFrame:frame];
+    if (self)
     {
         self.delegate = self;
         self.clipsToBounds = NO;
@@ -146,26 +112,37 @@
     return self;
 }
 
-- (void)initialize
+#pragma mark - generate
+
+- (DCTitleScrollViewCell *)cellAtIndex:(NSInteger)index
+{
+    for (DCTitleScrollViewCell *cell in self.visibleCells) {
+        if (cell.index == index) return cell;
+    }
+
+    NSInteger relativedIndex = [NSNumber relativedIntegerValueForIndex:index length:[self.dataSource numberOfCellsInDCTitleScrollView:self]];
+    DCTitleScrollViewCell *cell = [self.dataSource dcTitleScrollView:self cellAtIndex:relativedIndex];
+    cell.index = index;
+
+    return cell;
+}
+
+#pragma mark - reloadData
+
+- (void)reloadData
 {
     for (DCTitleScrollViewCell *cell in self.visibleCells) {
         [cell removeFromSuperview];
     }
     self.visibleCells = [@[] mutableCopy];
 
-    NSInteger length = ([self.dataSource numberOfCellsInDCTitleScrollView:self] != 1)?11:1;
+    NSInteger length = ([self.dataSource numberOfCellsInDCTitleScrollView:self] > 1)?11:1;
     self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * length, CGRectGetHeight(self.frame));
     [self renderCells];
     CGFloat x = CGRectGetWidth(self.bounds) * ([self centerPage]);
     [self setContentOffset:CGPointMake(x, 0) animated:NO];
 }
 
-- (void)reloadData
-{
-    [self initialize];
-}
-
-#pragma mark - public
 - (void)scrollToPage:(NSInteger)page animated:(BOOL)animated
 {
     NSInteger diff = page - self.page;
@@ -181,10 +158,11 @@
     }
 }
 
-#pragma mark -
+#pragma mark - rendering
+
 - (void)renderCells
 {
-    NSMutableArray *cells = @[].mutableCopy;
+    NSMutableArray *cells = [@[] mutableCopy];
     // remove not visibled cells
     for (DCTitleScrollViewCell *cell in self.visibleCells) {
         if (cell.index < self.page-[self centerPage] || cell.index > self.page+[self centerPage]) {
@@ -195,7 +173,7 @@
     }
 
     // add cells to visibled
-    self.visibleCells = cells.mutableCopy;
+    self.visibleCells = [cells mutableCopy];
     int i = 0;
     for (int index=self.page-[self centerPage]; index<=self.page+[self centerPage]; index++) {
         DCTitleScrollViewCell *cell = [self cellAtIndex:index];
@@ -209,6 +187,13 @@
         i++;
     }
     [self switchHighlited];
+}
+
+- (CGRect)frameForTitleAtIndex:(NSInteger)index
+{
+    CGSize size = self.bounds.size;
+    CGFloat x = 0. + (size.width) * (index);
+    return CGRectMake(x, 0, size.width, size.height);
 }
 
 - (void)changeCellsWithHighlited:(BOOL)highlited
@@ -225,7 +210,8 @@
     }
 }
 
-#pragma mark - touch
+#pragma mark - UIResponder
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     self.touched = YES;
@@ -235,7 +221,7 @@
 {
     self.touched = NO;
     CGPoint point = [[touches anyObject] locationInView:self];
-    if ([self.dataSource numberOfCellsInDCTitleScrollView:self] != 1) {
+    if ([self.dataSource numberOfCellsInDCTitleScrollView:self] > 1) {
         NSInteger touchedPage = [self convertToPageWithOffsetX:point.x];
         if (touchedPage > [self centerPage]) {
             [self scrollToPage:self.page+1 animated:YES];
@@ -255,32 +241,8 @@
     self.touched = NO;
 }
 
-#pragma mark -
-- (DCTitleScrollViewCell *)cellAtIndex:(NSInteger)index
-{
-    for (DCTitleScrollViewCell *cell in self.visibleCells) {
-        if (cell.index == index) return cell;
-    }
-
-    DCTitleScrollViewCell *cell = [self.dataSource dcTitleScrollView:self cellAtIndex:[self indexRelativedForIndex:index]];
-    cell.index = index;
-
-    return cell;
-}
-
-- (NSInteger)indexRelativedForIndex:(NSInteger)index
-{
-    return [NSNumber relativedIntegerValueForIndex:index length:[self.dataSource numberOfCellsInDCTitleScrollView:self]];
-}
-
-- (CGRect)frameForTitleAtIndex:(NSInteger)index
-{
-    CGSize size = self.bounds.size;
-    CGFloat x = 0. + (size.width) * (index);
-    return CGRectMake(x, 0, size.width, size.height);
-}
-
 #pragma mark - UIScrollViewDelegate
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView.contentOffset.y) {
@@ -323,10 +285,53 @@
     CGFloat x = CGRectGetWidth(self.bounds) * ([self centerPage]);
     [self setContentOffset:CGPointMake(x, 0) animated:animated];
 }
+
 @end
 
 
+#pragma mark - DCScrollViewCell
+
+@interface DCScrollViewCell () {
+@private
+    NSNumber *_number;
+}
+@property (nonatomic) NSInteger index;
+@property (nonatomic) NSString *reuseIdentifier;
+@end
+
+@implementation DCScrollViewCell
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
+{
+    if(self = [super init]) {
+		self.reuseIdentifier = reuseIdentifier;
+	}
+	return self;
+}
+#pragma mark - accessor
+
+- (void)setIndex:(NSInteger)index
+{
+    _number = @(index);
+}
+
+- (NSInteger)index
+{
+    if (_number) {
+        return [_number integerValue];
+    }
+    return NSNotFound;
+}
+
+#pragma mark -
+- (void)dealloc
+{
+    _number = nil;
+    _reuseIdentifier = nil;
+}
+@end
+
 #pragma mark - DCBodyScrollView
+
 @class DCBodyScrollView;
 @protocol DCBodyScrollViewDataSource <NSObject>
 - (DCScrollViewCell *)dcBodyScrollView:(DCBodyScrollView *)scrollView cellAtIndex:(NSInteger)index;
@@ -381,11 +386,6 @@
     };
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-}
-
 - (void)renderCells
 {
     CGFloat centerOffsetX = (self.contentSize.width - CGRectGetWidth(self.bounds)) / 2.0;
@@ -402,20 +402,12 @@
     [self initialize];
 }
 
+#pragma mark - accessor
 - (void)setPage:(NSInteger)page
 {
     if (_page != page) {
         _page = page;
         [self initialize];
-    }
-}
-
-- (void)setCurrentCell:(UIView *)currentCell
-{
-    if (![_currentCell isEqual:currentCell] &&
-        currentCell) {
-        _currentCell = currentCell;
-        [self.dcDelegate dcBodyScrollView:self didChangeVisibleCellAtIndex:[self indexRelativedForIndex:self.page]];
     }
 }
 
@@ -434,6 +426,26 @@
     return [cells copy];
 }
 
+#pragma mark -
+
+- (void)setCurrentCell:(UIView *)currentCell
+{
+    if (![_currentCell isEqual:currentCell] &&
+        currentCell) {
+        _currentCell = currentCell;
+        [self.dcDelegate dcBodyScrollView:self didChangeVisibleCellAtIndex:[self indexRelativedForIndex:self.page]];
+    }
+}
+
+- (void)enqueueReusableCell:(id)cell
+{
+    if (self.dataSource) {
+        [self.dataSource dcBodyScrollView:self enqueueReusableCell:cell];
+    }
+    [cell removeFromSuperview];
+    cell = nil;
+}
+
 - (void)initialize
 {
     NSInteger length = ([self.dataSource numberOfCellsInDCBodyScrollView:self] != 1)?3:1;
@@ -443,19 +455,13 @@
     CGPoint startPoint = CGPointZero;
     if (self.previousCell) {
         startPoint = self.previousCell.frame.origin;
-        [self.dataSource dcBodyScrollView:self enqueueReusableCell:self.previousCell];
-        [self.previousCell removeFromSuperview];
-        self.previousCell = nil;
+        [self enqueueReusableCell:self.previousCell];
     }
     if (self.currentCell) {
-        [self.dataSource dcBodyScrollView:self enqueueReusableCell:self.currentCell];
-        [self.currentCell removeFromSuperview];
-        self.currentCell = nil;
+        [self enqueueReusableCell:self.currentCell];
     }
     if (self.nextCell) {
-        [self.dataSource dcBodyScrollView:self enqueueReusableCell:self.nextCell];
-        [self.nextCell removeFromSuperview];
-        self.nextCell = nil;
+        [self enqueueReusableCell:self.nextCell];
     }
 
     if ([self.dataSource numberOfCellsInDCBodyScrollView:self] != 1) {
