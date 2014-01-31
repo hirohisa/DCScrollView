@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "DCScrollView"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "DCScrollView is the scroll view that current title is changed with a delay."
   s.homepage     = "https://github.com/hirohisa/DCScrollView"
   s.license      = {
