@@ -13,6 +13,7 @@
 @class DCTitleScrollView;
 
 @protocol DCTitleScrollViewDelegate <NSObject>
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView;
 
@@ -43,8 +44,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self) {
         self.delegate = self;
         self.clipsToBounds = NO;
         self.pagingEnabled = YES;
@@ -60,10 +60,13 @@
 - (DCTitleScrollViewCell *)cellAtIndex:(NSInteger)index
 {
     for (DCTitleScrollViewCell *cell in self.visibleCells) {
-        if (cell.index == index) return cell;
+        if (cell.index == index) {
+            return cell;
+        }
     }
 
-    NSInteger relativedIndex = [NSNumber relativedIntegerValueForIndex:index length:[self.dataSource numberOfCellsInDCTitleScrollView:self]];
+    NSUInteger length = [self.dataSource numberOfCellsInDCTitleScrollView:self];
+    NSInteger relativedIndex = [NSNumber relativedIntegerValueForIndex:index length:length];
     DCTitleScrollViewCell *cell = [self.dataSource dcTitleScrollView:self cellAtIndex:relativedIndex];
     cell.index = index;
 
@@ -79,7 +82,7 @@
     }
     self.visibleCells = [@[] mutableCopy];
 
-    NSInteger length = ([self.dataSource numberOfCellsInDCTitleScrollView:self] > 1)?11:1;
+    NSUInteger length = ([self.dataSource numberOfCellsInDCTitleScrollView:self] > 1)?11:1;
     self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * length, CGRectGetHeight(self.frame));
     [self renderCells];
     CGFloat x = CGRectGetWidth(self.bounds) * ([self centerPage]);
@@ -135,8 +138,11 @@
 - (CGRect)frameForTitleAtIndex:(NSInteger)index
 {
     CGSize size = self.bounds.size;
-    CGFloat x = 0. + (size.width) * (index);
-    return CGRectMake(x, 0, size.width, size.height);
+    return (CGRect) {
+        .origin.x = (size.width) * (index),
+        .origin.y = 0,
+        .size     = size
+    };
 }
 
 - (void)changeCellsWithHighlited:(BOOL)highlited
@@ -234,41 +240,56 @@
 #pragma mark - DCBodyScrollView
 
 @class DCBodyScrollView;
+
 @protocol DCBodyScrollViewDataSource <NSObject>
+
 - (DCScrollViewCell *)dcBodyScrollView:(DCBodyScrollView *)scrollView cellAtIndex:(NSInteger)index;
 - (NSInteger)numberOfCellsInDCBodyScrollView:(DCBodyScrollView *)scrollView;
-
 - (void)dcBodyScrollView:(DCBodyScrollView *)scrollView enqueueReusableCell:(id)cell;
+
 @end
 
 @protocol DCBodyScrollViewDelegate <NSObject>
+
 - (void)dcBodyScrollView:(DCBodyScrollView *)scrollView didChangeVisibleCellAtIndex:(NSInteger)index;
+
 @end
 
 @interface DCBodyScrollView : UIScrollView
+
 @property (nonatomic, readonly) NSArray *visibleCells;
 
 @property (nonatomic) NSInteger page;
 @property (nonatomic, assign) UIView *previousCell;
 @property (nonatomic, assign) UIView *currentCell;
 @property (nonatomic, assign) UIView *nextCell;
+
 @property (nonatomic, assign) id<DCBodyScrollViewDataSource> dataSource;
 @property (nonatomic, assign) id<DCBodyScrollViewDelegate> dcDelegate;
+
 @end
 
 @implementation DCBodyScrollView
 
 - (id)initWithFrame:(CGRect)frame
 {
-    if ((self = [super initWithFrame:frame]))
-    {
+    self = [super initWithFrame:frame];
+    if (self) {
         self.scrollsToTop = NO;
         [self initialize];
     }
     return self;
 }
 
+#pragma mark - public
+
+- (void)reloadData
+{
+    [self initialize];
+}
+
 #pragma mark - Layout
+
 - (void)recenterIfNeeded
 {
     CGFloat centerOffsetX = (self.contentSize.width - CGRectGetWidth(self.bounds)) / 2.0;
@@ -297,13 +318,8 @@
     }
 }
 
-#pragma mark - public
-- (void)reloadData
-{
-    [self initialize];
-}
-
 #pragma mark - accessor
+
 - (void)setPage:(NSInteger)page
 {
     if (_page != page) {
@@ -327,8 +343,6 @@
     return [cells copy];
 }
 
-#pragma mark -
-
 - (void)setCurrentCell:(UIView *)currentCell
 {
     if (![_currentCell isEqual:currentCell] &&
@@ -337,6 +351,8 @@
         [self.dcDelegate dcBodyScrollView:self didChangeVisibleCellAtIndex:[self indexRelativedForIndex:self.page]];
     }
 }
+
+#pragma mark - enqueue
 
 - (void)enqueueReusableCell:(id)cell
 {
@@ -439,9 +455,11 @@
 }
 
 #pragma mark -
+
 - (NSInteger)indexRelativedForIndex:(NSInteger)index
 {
-    return [NSNumber relativedIntegerValueForIndex:index length:[self.dataSource numberOfCellsInDCBodyScrollView:self]];
+    NSUInteger length = [self.dataSource numberOfCellsInDCBodyScrollView:self];
+    return [NSNumber relativedIntegerValueForIndex:index length:length];
 }
 
 - (DCScrollViewCell *)cellAtIndex:(NSInteger)index
@@ -453,13 +471,13 @@
         .size.width = CGRectGetWidth(self.frame),
         .size.height = CGRectGetHeight(self.frame)
     };
-    cell.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     return cell;
 }
 
 @end
 
 #pragma mark - DCScrollView
+
 @interface DCScrollView ()
 <UIScrollViewDelegate, DCTitleScrollViewDelegate, DCTitleScrollViewDataSource, DCBodyScrollViewDataSource, DCBodyScrollViewDelegate>
 @property (nonatomic) BOOL touchedBody;
@@ -492,7 +510,8 @@
     return self;
 }
 
-#pragma mark - setter/getter
+#pragma mark - accessor
+
 - (UIView *)titleView
 {
     return self.headBackgroundView;
@@ -512,7 +531,9 @@
 {
     return (DCScrollViewCell *)self.bodyScrollView.currentCell;
 }
-#pragma mark -
+
+#pragma mark - initialize
+
 - (void)initialize
 {
     // head
@@ -571,7 +592,7 @@
 {
     if (identifier &&
         [self.reusableCells objectForKey:identifier] &&
-        [[self.reusableCells objectForKey:identifier] count] > 0) {
+        [[self.reusableCells objectForKey:identifier] count]) {
 
         id cell = [[self.reusableCells objectForKey:identifier] lastObject];
         [[self.reusableCells objectForKey:identifier] removeLastObject];
@@ -615,7 +636,7 @@
 
 - (BOOL)validateToInitialize
 {
-    return (_dataSource && _delegate && !CGRectEqualToRect(self.frame, CGRectZero));
+    return (self.dataSource && self.delegate && !CGRectEqualToRect(self.frame, CGRectZero));
 }
 
 - (void)reloadData
@@ -639,6 +660,7 @@
 }
 
 #pragma mark - touch
+
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     if ([self.headBackgroundView pointInside:point withEvent:event]) {
@@ -647,7 +669,14 @@
     return [super hitTest:point withEvent:event];
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    self.touchedBody = [touch.view isEqual:self.bodyScrollView];
+}
+
 #pragma mark - UIScrollViewDelegate
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if ([scrollView isEqual:self.bodyScrollView]) {
@@ -661,12 +690,6 @@
         [self.headScrollView scrollToPage:(self.bodyScrollView.page + adjust) animated:YES];
         [self.bodyScrollView renderCells];
     }
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    self.touchedBody = [touch.view isEqual:self.bodyScrollView];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
@@ -686,6 +709,7 @@
 }
 
 #pragma mark - DCBodyScrollViewDataSource
+
 - (DCScrollViewCell *)dcBodyScrollView:(DCBodyScrollView *)scrollView cellAtIndex:(NSInteger)index
 {
     DCScrollViewCell *cell = [self.dataSource dcScrollView:self cellAtIndex:index];
@@ -704,14 +728,12 @@
 
 - (void)dcBodyScrollView:(DCBodyScrollView *)scrollView didChangeVisibleCellAtIndex:(NSInteger)index
 {
-    [self delegateDidChangeVisibleCell:self.currentCell atIndex:index];
+    if ([self.delegate respondsToSelector:@selector(dcScrollViewDidScroll:didChangeVisibleCell:atIndex:)]) {
+        [self.delegate dcScrollViewDidScroll:self didChangeVisibleCell:self.currentCell atIndex:index];
+    }
 }
 
-#pragma mark - DCTitleScrollViewDelegate, DCTitleScrollViewDataSource
-- (NSInteger)numberOfCellsInDCTitleScrollView:(DCTitleScrollView *)scrollView
-{
-    return [self.dataSource numberOfCellsInDCScrollView:self];
-}
+#pragma mark - DCTitleScrollViewDelegate
 
 -(CGFloat)widthOfCellInDCTitleScrollView
 {
@@ -729,6 +751,13 @@
         return [self.delegate heightOfCellInDCTitleScrollView];
     }
     return 44.;
+}
+
+#pragma mark - DCTitleScrollViewDataSource
+
+- (NSInteger)numberOfCellsInDCTitleScrollView:(DCTitleScrollView *)scrollView
+{
+    return [self.dataSource numberOfCellsInDCScrollView:self];
 }
 
 - (DCTitleScrollViewCell *)dcTitleScrollView:(DCTitleScrollView *)scrollView cellAtIndex:(NSInteger)index
@@ -757,10 +786,4 @@
     return cell;
 }
 
-- (void)delegateDidChangeVisibleCell:(DCScrollViewCell *)cell atIndex:(NSInteger)index
-{
-    if ([self.delegate respondsToSelector:@selector(dcScrollViewDidScroll:didChangeVisibleCell:atIndex:)]) {
-        [self.delegate dcScrollViewDidScroll:self didChangeVisibleCell:cell atIndex:index];
-    }
-}
 @end

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DCScrollView.h"
 
-@interface DemoViewController : UIViewController <DCScrollViewDataSource, DCScrollViewDelegate>
+@interface DemoViewController : UIViewController
+<DCScrollViewDataSource, DCScrollViewDelegate>
+
 @property (nonatomic) NSInteger numerOfCells;
 @end

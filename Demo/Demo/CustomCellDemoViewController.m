@@ -46,9 +46,6 @@
         .size.height = 15
     };
 }
-@end
-
-@interface CustomCellDemoViewController ()
 
 @end
 
@@ -61,16 +58,6 @@
         self.numerOfCells = 10;
     }
     return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - DCScrollViewDataSource

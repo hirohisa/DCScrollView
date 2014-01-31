@@ -10,10 +10,6 @@
 #import "DemoViewController.h"
 #import "CustomCellDemoViewController.h"
 
-@interface DemoTableViewController ()
-
-@end
-
 @implementation DemoTableViewController
 
 - (void)viewDidLoad

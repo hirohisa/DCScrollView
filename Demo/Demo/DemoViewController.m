@@ -8,19 +8,40 @@
 
 #import "DemoViewController.h"
 
+@interface DemoDCScrollViewCell : DCScrollViewCell
+@property (nonatomic, strong) UILabel *textLabel;
+@end
+
+@implementation DemoDCScrollViewCell
+
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithReuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.textLabel = [[UILabel alloc] init];
+        self.textLabel.textAlignment = UITextAlignmentCenter;
+        self.textLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.textLabel];
+    }
+    return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.textLabel.center = (CGPoint) {
+        .x = CGRectGetWidth(self.frame)/2,
+        .y = CGRectGetHeight(self.frame)/2
+    };
+}
+
+@end
+
 @interface DemoViewController ()
 @property (nonatomic, strong) DCScrollView *scrollView;
 @end
 
 @implementation DemoViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -61,21 +82,14 @@
 
 - (DCScrollViewCell *)dcScrollView:(DCScrollView *)scrollView cellAtIndex:(NSInteger)index
 {
-    NSString *identifier = @"DCScrollView";
-    DCScrollViewCell *cell = [scrollView dequeueReusableCellWithIdentifier:identifier];
-    NSInteger tag = 111111;
-    if (cell == nil) {
-        cell  = [[DCScrollViewCell alloc] initWithReuseIdentifier:identifier];
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectZero];
-        label.center = cell.center;
-        label.textAlignment = UITextAlignmentCenter;
-        label.backgroundColor = [UIColor clearColor];
-        label.tag = tag;
-        [cell addSubview:label];
+    NSString *identifier = @"Cell";
+    DemoDCScrollViewCell *cell = [scrollView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell  = [[DemoDCScrollViewCell alloc] initWithReuseIdentifier:identifier];
     }
-    UILabel *label = (UILabel *)[cell viewWithTag:tag];
-    label.frame = CGRectMake(0, 0, CGRectGetWidth(scrollView.bounds), CGRectGetHeight(scrollView.bounds));
-    label.text = [NSString stringWithFormat:@"title %d", index];
+    cell.textLabel.text = [NSString stringWithFormat:@"title %d", index];
+    [cell.textLabel sizeToFit];
+
     return cell;
 }
 
@@ -86,7 +100,7 @@
 
 - (void)dcScrollViewDidScroll:(DCScrollView *)scrollView didChangeVisibleCell:(DCScrollViewCell *)cell atIndex:(NSInteger)index
 {
-    UILabel *label = (UILabel *)[cell viewWithTag:111111];
-    NSLog(@"%d:%@", index, label.text);
+    NSLog(@"index: %d", index);
 }
+
 @end
