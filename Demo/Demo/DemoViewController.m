@@ -7,7 +7,6 @@
 //
 
 #import "DemoViewController.h"
-#import "DCScrollView.h"
 
 @interface DemoViewController () <DCScrollViewDataSource, DCScrollViewDelegate>
 @property (nonatomic, strong) DCScrollView *scrollView;
@@ -27,7 +26,7 @@
 {
     [super viewDidLoad];
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.edgesForExtendedLayout = UIRectEdgeBottom;
     }
     self.view.clipsToBounds = YES;
     _scrollView = [[DCScrollView alloc]initWithFrame:self.view.bounds];
@@ -45,6 +44,7 @@
 }
 
 #pragma mark - DCScrollViewDataSource
+
 - (NSInteger)numberOfCellsInDCScrollView:(DCScrollView *)scrollView
 {
     if (self.numerOfCells) {

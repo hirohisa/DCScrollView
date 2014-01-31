@@ -8,6 +8,7 @@
 
 #import "DemoTableViewController.h"
 #import "DemoViewController.h"
+#import "CustomCellDemoViewController.h"
 
 @interface DemoTableViewController ()
 
@@ -30,7 +31,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -41,10 +42,19 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     NSString *text;
-    if (indexPath.row == 0) {
-        text = @"sample 10 cells";
-    } else if (indexPath.row == 1) {
-        text = @"sample 1 cells";
+    switch (indexPath.row) {
+        case 0:
+            text = @"sample 10 cells";
+            break;
+        case 1:
+            text = @"sample 1 cells";
+            break;
+        case 2:
+            text = @"sample custom cells";
+            break;
+
+        default:
+            break;
     }
     cell.textLabel.text = text;
 
@@ -55,12 +65,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DemoViewController *viewController = [[DemoViewController alloc] init];
-    if (indexPath.row == 0) {
-        viewController.numerOfCells = 10;
+    UIViewController *viewController;
+    switch (indexPath.row) {
+        case 0:
+            viewController = [[DemoViewController alloc] init];
+            [(DemoViewController *)viewController setNumerOfCells:10];
+            break;
+        case 1:
+            viewController = [[DemoViewController alloc] init];
+            [(DemoViewController *)viewController setNumerOfCells:1];
+            break;
+        case 2:
+            viewController = [[CustomCellDemoViewController alloc] init];
+            break;
+        default:
+            break;
     }
 
-    [self.navigationController pushViewController:viewController animated:YES];
+    if (viewController) {
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 @end
