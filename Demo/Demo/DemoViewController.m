@@ -35,12 +35,18 @@
     self.scrollView.delegate = self;
     [self.scrollView setFont:[UIFont systemFontOfSize:15.] textColor:[UIColor grayColor] highlightedTextColor:[UIColor redColor]];
     [self.view addSubview:self.scrollView];
-    [self.scrollView reloadData];
+    [self reloadData];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithTitle:@"Reload"
+                                              style:UIBarButtonItemStylePlain
+                                              target:self
+                                              action:@selector(reloadData)];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)reloadData
 {
-    [super didReceiveMemoryWarning];
+    [self.scrollView reloadData];
 }
 
 #pragma mark - DCScrollViewDataSource
