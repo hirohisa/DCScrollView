@@ -15,6 +15,18 @@
 
 @implementation DCTitleScrollViewCell
 
+-(id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.textLabel = [[UILabel alloc] init];
+        self.textLabel.backgroundColor = [UIColor clearColor];
+        self.textLabel.textAlignment = NSTextAlignmentCenter;
+        self.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     _number = nil;

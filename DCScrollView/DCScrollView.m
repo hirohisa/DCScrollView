@@ -733,27 +733,26 @@
 
 - (DCTitleScrollViewCell *)dcTitleScrollView:(DCTitleScrollView *)scrollView cellAtIndex:(NSInteger)index
 {
+    DCTitleScrollViewCell *cell;
     if ([self.dataSource respondsToSelector:@selector(dcTitleScrollViewCellAtIndex:)]) {
-        return [self.dataSource dcTitleScrollViewCellAtIndex:index];
+        cell = [self.dataSource dcTitleScrollViewCellAtIndex:index];
     }
 
-    DCTitleScrollViewCell *cell = [[DCTitleScrollViewCell alloc] init];
-    if ([self.dataSource respondsToSelector:@selector(dcTitleScrollViewCellTitleAtIndex:)]) {
-        UILabel *textLabel = [[UILabel alloc] init];
-        textLabel.backgroundColor = [UIColor clearColor];
-        textLabel.text = [self.dataSource dcTitleScrollViewCellTitleAtIndex:index];
-        textLabel.textAlignment = NSTextAlignmentCenter;
-        textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    if (!cell) {
+        cell = [[DCTitleScrollViewCell alloc] init];
         if (self.font) {
-            textLabel.font = self.font;
+            cell.textLabel.font = self.font;
         }
         if (self.textColor) {
-            textLabel.textColor = self.textColor;
+            cell.textLabel.textColor = self.textColor;
         }
         if (self.highlightedTextColor) {
-            textLabel.highlightedTextColor = self.highlightedTextColor;
+            cell.textLabel.highlightedTextColor = self.highlightedTextColor;
         }
-        cell.textLabel = textLabel;
+    }
+
+    if ([self.dataSource respondsToSelector:@selector(dcTitleScrollViewCellTitleAtIndex:)]) {
+        cell.textLabel.text = [self.dataSource dcTitleScrollViewCellTitleAtIndex:index];
     }
     return cell;
 }
