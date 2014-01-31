@@ -8,7 +8,7 @@
 
 #import "DemoViewController.h"
 
-@interface DemoViewController () <DCScrollViewDataSource, DCScrollViewDelegate>
+@interface DemoViewController ()
 @property (nonatomic, strong) DCScrollView *scrollView;
 @end
 
