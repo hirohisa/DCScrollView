@@ -275,8 +275,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.showsHorizontalScrollIndicator = NO;
         self.scrollsToTop = NO;
-        [self initialize];
+        [self reloadData];
     }
     return self;
 }
@@ -285,37 +286,7 @@
 
 - (void)reloadData
 {
-    [self initialize];
-}
-
-#pragma mark - Layout
-
-- (void)recenterIfNeeded
-{
-    CGFloat centerOffsetX = (self.contentSize.width - CGRectGetWidth(self.bounds)) / 2.0;
-    self.contentOffset = CGPointMake(centerOffsetX, self.contentOffset.y);
-    self.previousCell.center = (CGPoint) {
-        .x = CGRectGetWidth(self.previousCell.frame)/2,
-        .y = self.previousCell.center.y
-    };
-    self.currentCell.center = (CGPoint) {
-        .x = CGRectGetMaxX(self.previousCell.frame) + CGRectGetWidth(self.currentCell.frame)/2,
-        .y = self.currentCell.center.y
-    };
-    self.nextCell.center = (CGPoint) {
-        .x = CGRectGetMaxX(self.currentCell.frame) + CGRectGetWidth(self.nextCell.frame)/2,
-        .y = self.nextCell.center.y
-    };
-}
-
-- (void)renderCells
-{
-    CGFloat centerOffsetX = (self.contentSize.width - CGRectGetWidth(self.bounds)) / 2.0;
-    CGFloat distanceFromCenter = fabs(self.contentOffset.x - centerOffsetX);
-    if (distanceFromCenter >= 320) {
-        [self adjustContents];
-        [self recenterIfNeeded];
-    }
+    [self _initialize];
 }
 
 #pragma mark - accessor
@@ -324,7 +295,7 @@
 {
     if (_page != page) {
         _page = page;
-        [self initialize];
+        [self reloadData];
     }
 }
 
@@ -360,27 +331,33 @@
         [self.dataSource dcBodyScrollView:self enqueueReusableCell:cell];
     }
     [cell removeFromSuperview];
-    cell = nil;
 }
 
-- (void)initialize
+#pragma mark - initialize
+
+- (void)_initialize
 {
+    // set content size
     NSInteger length = ([self.dataSource numberOfCellsInDCBodyScrollView:self] != 1)?3:1;
     self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * length, CGRectGetHeight(self.frame));
-    self.showsHorizontalScrollIndicator = NO;
 
+    // enqueue cells
     CGPoint startPoint = CGPointZero;
     if (self.previousCell) {
         startPoint = self.previousCell.frame.origin;
         [self enqueueReusableCell:self.previousCell];
+        self.previousCell = nil;
     }
     if (self.currentCell) {
         [self enqueueReusableCell:self.currentCell];
+        self.currentCell = nil;
     }
     if (self.nextCell) {
         [self enqueueReusableCell:self.nextCell];
+        self.nextCell = nil;
     }
 
+    // add subviews
     if ([self.dataSource numberOfCellsInDCBodyScrollView:self] != 1) {
         id previousCell = [self cellAtIndex:self.page-1];
         self.previousCell = previousCell;
@@ -399,8 +376,8 @@
         .size = self.currentCell.frame.size
     };
     [self addSubview:self.currentCell];
-    startPoint = CGPointMake(CGRectGetMaxX(self.currentCell.frame), 0);
 
+    startPoint = CGPointMake(CGRectGetMaxX(self.currentCell.frame), 0);
     if ([self.dataSource numberOfCellsInDCBodyScrollView:self] != 1) {
         id nextCell = [self cellAtIndex:self.page+1];
         self.nextCell = nextCell;
@@ -410,25 +387,65 @@
         };
         [self addSubview:self.nextCell];
     }
+
     self.contentOffset = CGPointMake(CGRectGetMinX(self.currentCell.frame), 0);
+}
+
+#pragma mark - rendering
+
+- (void)renderCells
+{
+    CGFloat centerOffsetX = (self.contentSize.width - CGRectGetWidth(self.bounds)) / 2.0;
+    CGFloat distanceFromCenter = fabs(self.contentOffset.x - centerOffsetX);
+    if (distanceFromCenter >= CGRectGetWidth(self.bounds)) {
+        [self adjustContents];
+        [self recenterIfNeeded];
+    }
+}
+
+- (void)recenterIfNeeded
+{
+    CGFloat centerOffsetX = (self.contentSize.width - CGRectGetWidth(self.bounds)) / 2.0;
+    self.contentOffset = CGPointMake(centerOffsetX, self.contentOffset.y);
+    self.previousCell.center = (CGPoint) {
+        .x = CGRectGetWidth(self.previousCell.frame)/2,
+        .y = self.previousCell.center.y
+    };
+    self.currentCell.center = (CGPoint) {
+        .x = CGRectGetMaxX(self.previousCell.frame) + CGRectGetWidth(self.currentCell.frame)/2,
+        .y = self.currentCell.center.y
+    };
+    self.nextCell.center = (CGPoint) {
+        .x = CGRectGetMaxX(self.currentCell.frame) + CGRectGetWidth(self.nextCell.frame)/2,
+        .y = self.nextCell.center.y
+    };
 }
 
 - (void)adjustContents
 {
     NSInteger page = [self willedPage];
+
     // remove
-    if (page == 0) {
-        [self.dataSource dcBodyScrollView:self enqueueReusableCell:self.nextCell];
-        [self.nextCell removeFromSuperview];
-        self.nextCell = nil;
-        _page = self.page -1;
-    } else if (page == 2) {
-        [self.dataSource dcBodyScrollView:self enqueueReusableCell:self.previousCell];
-        [self.previousCell removeFromSuperview];
-        self.previousCell = nil;
-        _page = self.page +1;
+    switch (page) {
+        case 0: {
+            [self enqueueReusableCell:self.nextCell];
+            self.nextCell = nil;
+            _page = self.page -1;
+        }
+            break;
+
+        case 1:
+            break;
+
+        case 2: {
+            [self enqueueReusableCell:self.previousCell];
+            self.previousCell = nil;
+            _page = self.page +1;
+        }
+            break;
     }
-    // set view when view is empty
+
+    // switch and generate view when view is empty
     if (!self.nextCell) {
         self.nextCell = self.currentCell;
         self.currentCell = self.previousCell;
@@ -534,7 +551,7 @@
 
 #pragma mark - initialize
 
-- (void)initialize
+- (void)_initialize
 {
     // head
     CGRect frame;
@@ -613,7 +630,7 @@
 {
     _dataSource = dataSource;
     if ([self validateToInitialize]) {
-        [self initialize];
+        [self _initialize];
     }
 }
 
@@ -621,7 +638,7 @@
 {
     _delegate = delegate;
     if ([self validateToInitialize]) {
-        [self initialize];
+        [self _initialize];
     }
 }
 
@@ -630,7 +647,7 @@
     BOOL changeFromZero = CGRectEqualToRect(self.frame, CGRectZero);
     [super setFrame:frame];
     if (changeFromZero && [self validateToInitialize]) {
-        [self initialize];
+        [self _initialize];
     }
 }
 
@@ -641,12 +658,12 @@
 
 - (void)reloadData
 {
-    [self clear];
+    [self _clear];
     [self.headScrollView reloadData];
     [self.bodyScrollView reloadData];
 }
 
-- (void)clear
+- (void)_clear
 {
     self.touchedBody = NO;
     self.reusableCells = [@{} mutableCopy];
