@@ -648,6 +648,7 @@
 
 - (void)clear
 {
+    self.touchedBody = NO;
     self.reusableCells = [@{} mutableCopy];
 }
 
