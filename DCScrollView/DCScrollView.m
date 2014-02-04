@@ -313,14 +313,6 @@
     return [cells copy];
 }
 
-- (void)setCurrentCell:(DCScrollViewCell *)currentCell
-{
-    _currentCell = currentCell;
-    if (currentCell) {
-        [self.dcDelegate dcBodyScrollView:self didChangeVisibleCellAtIndex:[self indexRelativedForIndex:self.page]];
-    }
-}
-
 #pragma mark - enqueue
 
 - (void)enqueueReusableCell:(id)cell
@@ -386,6 +378,7 @@
         [self addSubview:self.nextCell];
     }
 
+    [self delegateDidChangeVisibleCell];
     self.contentOffset = CGPointMake(CGRectGetMinX(self.currentCell.frame), 0);
 }
 
@@ -455,6 +448,8 @@
         };
         self.previousCell = cell;
         [self addSubview:cell];
+
+        [self delegateDidChangeVisibleCell];
     } else if (!self.previousCell) {
         self.previousCell = self.currentCell;
         self.currentCell = self.nextCell;
@@ -466,6 +461,8 @@
         };
         self.nextCell = cell;
         [self addSubview:cell];
+
+        [self delegateDidChangeVisibleCell];
     }
 }
 
@@ -487,6 +484,13 @@
         .size.height = CGRectGetHeight(self.frame)
     };
     return cell;
+}
+
+- (void)delegateDidChangeVisibleCell
+{
+    if (self.currentCell) {
+        [self.dcDelegate dcBodyScrollView:self didChangeVisibleCellAtIndex:[self indexRelativedForIndex:self.page]];
+    }
 }
 
 @end
