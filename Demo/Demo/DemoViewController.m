@@ -56,7 +56,6 @@
     self.scrollView.delegate = self;
     [self.scrollView setFont:[UIFont systemFontOfSize:15.] textColor:[UIColor grayColor] highlightedTextColor:[UIColor redColor]];
     [self.view addSubview:self.scrollView];
-    [self reloadData];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithTitle:@"Reload"
@@ -100,7 +99,8 @@
 
 - (void)dcScrollViewDidScroll:(DCScrollView *)scrollView didChangeVisibleCell:(DCScrollViewCell *)cell atIndex:(NSInteger)index
 {
-    NSLog(@"index: %d", index);
+    DemoDCScrollViewCell *aCell = (DemoDCScrollViewCell *)cell;
+    NSLog(@"index: %d, cell title: %@", index, aCell.textLabel.text);
 }
 
 @end
