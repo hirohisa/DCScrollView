@@ -260,9 +260,9 @@
 @property (nonatomic, readonly) NSArray *visibleCells;
 
 @property (nonatomic) NSInteger page;
-@property (nonatomic, assign) UIView *previousCell;
-@property (nonatomic, assign) UIView *currentCell;
-@property (nonatomic, assign) UIView *nextCell;
+@property (nonatomic, assign) DCScrollViewCell *previousCell;
+@property (nonatomic, assign) DCScrollViewCell *currentCell;
+@property (nonatomic, assign) DCScrollViewCell *nextCell;
 
 @property (nonatomic, assign) id<DCBodyScrollViewDataSource> dataSource;
 @property (nonatomic, assign) id<DCBodyScrollViewDelegate> dcDelegate;
@@ -277,7 +277,6 @@
     if (self) {
         self.showsHorizontalScrollIndicator = NO;
         self.scrollsToTop = NO;
-        [self reloadData];
     }
     return self;
 }
@@ -314,11 +313,10 @@
     return [cells copy];
 }
 
-- (void)setCurrentCell:(UIView *)currentCell
+- (void)setCurrentCell:(DCScrollViewCell *)currentCell
 {
-    if (![_currentCell isEqual:currentCell] &&
-        currentCell) {
-        _currentCell = currentCell;
+    _currentCell = currentCell;
+    if (currentCell) {
         [self.dcDelegate dcBodyScrollView:self didChangeVisibleCellAtIndex:[self indexRelativedForIndex:self.page]];
     }
 }
