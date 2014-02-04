@@ -447,7 +447,7 @@
     if (!self.nextCell) {
         self.nextCell = self.currentCell;
         self.currentCell = self.previousCell;
-        UIView *cell = [self cellAtIndex:self.page-1];
+        DCScrollViewCell *cell = [self cellAtIndex:self.page-1];
         cell.frame = (CGRect) {
             .origin.x = CGRectGetMinX(self.currentCell.frame) - CGRectGetWidth(cell.frame),
             .origin.y = CGRectGetMinY(self.currentCell.frame),
@@ -458,7 +458,7 @@
     } else if (!self.previousCell) {
         self.previousCell = self.currentCell;
         self.currentCell = self.nextCell;
-        UIView *cell = [self cellAtIndex:self.page+1];
+        DCScrollViewCell *cell = [self cellAtIndex:self.page+1];
         cell.frame = (CGRect) {
             .origin.x = CGRectGetMinX(self.currentCell.frame) + CGRectGetWidth(cell.frame),
             .origin.y = CGRectGetMinY(self.currentCell.frame),
@@ -656,12 +656,12 @@
 
 - (void)reloadData
 {
-    [self _clear];
+    [self clear];
     [self.headScrollView reloadData];
     [self.bodyScrollView reloadData];
 }
 
-- (void)_clear
+- (void)clear
 {
     self.touchedBody = NO;
     self.reusableCells = [@{} mutableCopy];
