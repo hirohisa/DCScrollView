@@ -4,11 +4,8 @@ Pod::Spec.new do |s|
   s.summary      = "DCScrollView is the scroll view that current title is changed with a delay."
   s.homepage     = "https://github.com/hirohisa/DCScrollView"
   s.license      = {
-                     :type => 'MIT',
-                     :text => <<-LICENSE
-                        The MIT License (MIT)
-                        Copyright (c) 2013 Hirohisa Kawasaki
-                                LICENSE
+                      :type => 'MIT',
+                      :file => 'LICENSE'
                    }
   s.author       = {
                       "Hirohisa Kawasaki" => "hirohisa.kawasaki@gmail.com"
