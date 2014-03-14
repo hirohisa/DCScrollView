@@ -20,7 +20,7 @@
 		65D1422C18D2A42300886B28 /* DCScrollView+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1422518D2A42300886B28 /* DCScrollView+Logic.m */; };
 		65D1422D18D2A42300886B28 /* DCScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1422718D2A42300886B28 /* DCScrollView.m */; };
 		65D1422E18D2A42300886B28 /* DCScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1422918D2A42300886B28 /* DCScrollViewCell.m */; };
-		65D1422F18D2A42300886B28 /* DCTitleScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1422B18D2A42300886B28 /* DCTitleScrollViewCell.m */; };
+		65D1422F18D2A42300886B28 /* DCScrollViewNavigationViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1422B18D2A42300886B28 /* DCScrollViewNavigationViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,8 +48,8 @@
 		65D1422718D2A42300886B28 /* DCScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollView.m; sourceTree = "<group>"; };
 		65D1422818D2A42300886B28 /* DCScrollViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollViewCell.h; sourceTree = "<group>"; };
 		65D1422918D2A42300886B28 /* DCScrollViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewCell.m; sourceTree = "<group>"; };
-		65D1422A18D2A42300886B28 /* DCTitleScrollViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTitleScrollViewCell.h; sourceTree = "<group>"; };
-		65D1422B18D2A42300886B28 /* DCTitleScrollViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTitleScrollViewCell.m; sourceTree = "<group>"; };
+		65D1422A18D2A42300886B28 /* DCScrollViewNavigationViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollViewNavigationViewCell.h; sourceTree = "<group>"; };
+		65D1422B18D2A42300886B28 /* DCScrollViewNavigationViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewNavigationViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,8 +132,8 @@
 				65D1422718D2A42300886B28 /* DCScrollView.m */,
 				65D1422818D2A42300886B28 /* DCScrollViewCell.h */,
 				65D1422918D2A42300886B28 /* DCScrollViewCell.m */,
-				65D1422A18D2A42300886B28 /* DCTitleScrollViewCell.h */,
-				65D1422B18D2A42300886B28 /* DCTitleScrollViewCell.m */,
+				65D1422A18D2A42300886B28 /* DCScrollViewNavigationViewCell.h */,
+				65D1422B18D2A42300886B28 /* DCScrollViewNavigationViewCell.m */,
 			);
 			name = DCScrollView;
 			path = ../DCScrollView;
@@ -204,7 +204,7 @@
 			files = (
 				65D1422D18D2A42300886B28 /* DCScrollView.m in Sources */,
 				65D1422118D2A3E400886B28 /* DemoTableViewController.m in Sources */,
-				65D1422F18D2A42300886B28 /* DCTitleScrollViewCell.m in Sources */,
+				65D1422F18D2A42300886B28 /* DCScrollViewNavigationViewCell.m in Sources */,
 				65D1421C18D2A3DB00886B28 /* CustomCellDemoViewController.m in Sources */,
 				65D141FC18D2A37700886B28 /* AppDelegate.m in Sources */,
 				65D1422C18D2A42300886B28 /* DCScrollView+Logic.m in Sources */,

@@ -13,4 +13,6 @@
 <DCScrollViewDataSource, DCScrollViewDelegate>
 
 @property (nonatomic) NSInteger numerOfCells;
+@property (nonatomic, strong) DCScrollView *scrollView;
+
 @end

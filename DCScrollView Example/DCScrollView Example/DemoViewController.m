@@ -37,10 +37,6 @@
 
 @end
 
-@interface DemoViewController ()
-@property (nonatomic, strong) DCScrollView *scrollView;
-@end
-
 @implementation DemoViewController
 
 - (void)viewDidLoad
@@ -79,7 +75,7 @@
     return 1;
 }
 
-- (DCScrollViewCell *)dcScrollView:(DCScrollView *)scrollView cellAtIndex:(NSInteger)index
+- (DCScrollViewCell *)dcscrollView:(DCScrollView *)scrollView cellAtIndex:(NSInteger)index
 {
     NSString *identifier = @"Cell";
     DemoDCScrollViewCell *cell = [scrollView dequeueReusableCellWithIdentifier:identifier];
@@ -92,12 +88,12 @@
     return cell;
 }
 
-- (NSString *)dcTitleScrollViewCellTitleAtIndex:(NSInteger)index
+- (NSString *)titleOfDCScrollViewCellAtIndex:(NSInteger)index
 {
     return [NSString stringWithFormat:@"title %d", index];
 }
 
-- (void)dcScrollViewDidScroll:(DCScrollView *)scrollView didChangeVisibleCell:(DCScrollViewCell *)cell atIndex:(NSInteger)index
+- (void)dcscrollViewDidScroll:(DCScrollView *)scrollView didChangeVisibleCell:(DCScrollViewCell *)cell atIndex:(NSInteger)index
 {
     DemoDCScrollViewCell *aCell = (DemoDCScrollViewCell *)cell;
     NSLog(@"index: %d, cell title: %@", index, aCell.textLabel.text);

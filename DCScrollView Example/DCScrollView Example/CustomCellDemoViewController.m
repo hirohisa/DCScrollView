@@ -8,7 +8,7 @@
 
 #import "CustomCellDemoViewController.h"
 
-@interface DemoTitleViewCell : DCTitleScrollViewCell
+@interface DemoTitleViewCell : DCScrollViewNavigationViewCell
 @property (nonatomic, strong) UILabel *detailLabel;
 @end
 
@@ -62,7 +62,7 @@
 
 #pragma mark - DCScrollViewDataSource
 
-- (DCTitleScrollViewCell *)dcTitleScrollViewCellAtIndex:(NSInteger)index
+- (DCScrollViewNavigationViewCell *)dcscrollView:(DCScrollView *)scrollView navigationViewCellAtIndex:(NSInteger)index
 {
     DemoTitleViewCell *cell = [[DemoTitleViewCell alloc] init];
     cell.textLabel.text = [@(index) stringValue];
@@ -71,9 +71,12 @@
     return cell;
 }
 
-- (CGFloat)heightOfCellInDCTitleScrollView
+- (CGSize)sizeOfDCScrollViewNavigationViewCell
 {
-    return 60.;
+    return (CGSize) {
+        .width = CGRectGetWidth(self.scrollView.frame)/3,
+        .height = 60.
+    };
 }
 
 @end

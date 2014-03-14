@@ -7,27 +7,30 @@
 
 #import <UIKit/UIKit.h>
 #import "DCScrollViewCell.h"
-#import "DCTitleScrollViewCell.h"
+#import "DCScrollViewNavigationViewCell.h"
 
 @class DCScrollView;
 
 @protocol DCScrollViewDataSource <NSObject>
 
 @required
+
 - (NSInteger)numberOfCellsInDCScrollView:(DCScrollView *)scrollView;
-- (DCScrollViewCell *)dcScrollView:(DCScrollView *)scrollView cellAtIndex:(NSInteger)index;
+- (DCScrollViewCell *)dcscrollView:(DCScrollView *)scrollView cellAtIndex:(NSInteger)index;
+
 @optional
-- (NSString *)dcTitleScrollViewCellTitleAtIndex:(NSInteger)index;
-- (DCTitleScrollViewCell *)dcTitleScrollViewCellAtIndex:(NSInteger)index;
+
+- (NSString *)titleOfDCScrollViewCellAtIndex:(NSInteger)index;
+- (DCScrollViewNavigationViewCell *)dcscrollView:(DCScrollView *)scrollView navigationViewCellAtIndex:(NSInteger)index;
 
 @end
 
 @protocol DCScrollViewDelegate <NSObject>
 
 @optional
-- (CGFloat)heightOfCellInDCTitleScrollView;
-- (CGFloat)widthOfCellInDCTitleScrollView;
-- (void)dcScrollViewDidScroll:(DCScrollView *)scrollView didChangeVisibleCell:(DCScrollViewCell *)cell atIndex:(NSInteger)index;
+
+- (CGSize)sizeOfDCScrollViewNavigationViewCell;
+- (void)dcscrollViewDidScroll:(DCScrollView *)scrollView didChangeVisibleCell:(DCScrollViewCell *)cell atIndex:(NSInteger)index;
 
 @end
 

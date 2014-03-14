@@ -1,19 +1,19 @@
 //
-//  DCTitleScrollViewCell.m
+//  DCScrollViewNavigationViewCell.m
 //
 //  Created by Hirohisa Kawasaki on 2014/01/24.
 //  Copyright (c) 2014年 Hirohisa Kawasaki. All rights reserved.
 //
 
-#import "DCTitleScrollViewCell.h"
+#import "DCScrollViewNavigationViewCell.h"
 
-@interface DCTitleScrollViewCell () {
+@interface DCScrollViewNavigationViewCell () {
 @private
     NSNumber *_number;
 }
 @end
 
-@implementation DCTitleScrollViewCell
+@implementation DCScrollViewNavigationViewCell
 
 -(id)initWithFrame:(CGRect)frame
 {
