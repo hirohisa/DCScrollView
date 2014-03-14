@@ -66,7 +66,7 @@
     }
 
     NSUInteger length = [self.dataSource numberOfCellsInDCTitleScrollView:self];
-    NSInteger relativedIndex = [NSNumber relativedIntegerValueForIndex:index length:length];
+    NSInteger relativedIndex = [@(index) relativedIntegerValueWithLength:length];
     DCTitleScrollViewCell *cell = [self.dataSource dcTitleScrollView:self cellAtIndex:relativedIndex];
     cell.index = index;
 
@@ -211,7 +211,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    int adjust = [scrollView willedPage] - [scrollView centerPage];
+    int adjust = [scrollView reservingPage] - [scrollView centerPage];
     _page = self.page + adjust;
     [self renderCells];
     [self scrollToCenterWithAnimated:NO];
@@ -414,7 +414,7 @@
 
 - (void)adjustContents
 {
-    NSInteger page = [self willedPage];
+    NSInteger page = [self reservingPage];
 
     // remove
     switch (page) {
@@ -471,7 +471,7 @@
 - (NSInteger)indexRelativedForIndex:(NSInteger)index
 {
     NSUInteger length = [self.dataSource numberOfCellsInDCBodyScrollView:self];
-    return [NSNumber relativedIntegerValueForIndex:index length:length];
+    return [@(index) relativedIntegerValueWithLength:length];
 }
 
 - (DCScrollViewCell *)cellAtIndex:(NSInteger)index
@@ -701,9 +701,9 @@
 {
     if ([scrollView isEqual:self.bodyScrollView]) {
         int adjust = 0;
-        if ([scrollView willedPage] == 0) {
+        if ([scrollView reservingPage] == 0) {
             adjust = -1;
-        } else if ([scrollView willedPage] == 2) {
+        } else if ([scrollView reservingPage] == 2) {
             adjust = 1;
         }
         self.touchedBody = YES;

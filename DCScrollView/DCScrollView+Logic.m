@@ -8,12 +8,13 @@
 #import "DCScrollView+Logic.h"
 
 @implementation UIScrollView (DCScrollViewLogic)
+
 - (NSInteger)currentPage
 {
     return [self convertToPageWithOffsetX:self.contentOffset.x];
 }
 
-- (NSInteger)willedPage
+- (NSInteger)reservingPage
 {
     return [self convertToPageWithOffsetX:(self.contentOffset.x - CGRectGetWidth(self.bounds) / 2)]+1;
 }
@@ -31,18 +32,17 @@
 @end
 
 @implementation NSNumber (DCScrollViewLogic)
-+ (NSUInteger)relativedIntegerValueForIndex:(NSInteger)index length:(NSUInteger)length
+
+- (NSUInteger)relativedIntegerValueWithLength:(NSUInteger)length
 {
-    NSInteger denominator = (length != 0)?length:1;
+    NSInteger index = [self integerValue];
+    NSInteger denominator = length?length:1;
     index = index%denominator;
 
     if (index < 0) {
-        index = length-abs(index);
+        index = length-abs((int)index);
     }
     return index;
 }
-@end
-
-@implementation DCScrollView (Logic)
 
 @end

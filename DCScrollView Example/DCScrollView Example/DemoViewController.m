@@ -19,7 +19,7 @@
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
         self.textLabel = [[UILabel alloc] init];
-        self.textLabel.textAlignment = UITextAlignmentCenter;
+        self.textLabel.textAlignment = NSTextAlignmentCenter;
         self.textLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:self.textLabel];
     }

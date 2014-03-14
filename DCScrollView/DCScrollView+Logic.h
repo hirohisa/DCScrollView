@@ -8,15 +8,16 @@
 #import "DCScrollView.h"
 
 @interface UIScrollView (DCScrollViewLogic)
+
 - (NSInteger)currentPage;
-- (NSInteger)willedPage;
+- (NSInteger)reservingPage;
 - (NSInteger)convertToPageWithOffsetX:(CGFloat)offsetX;
 - (NSInteger)centerPage;
+
 @end
 
 @interface NSNumber (DCScrollViewLogic)
-+ (NSUInteger)relativedIntegerValueForIndex:(NSInteger)index length:(NSUInteger)length;
-@end
 
-@interface DCScrollView (Logic)
+- (NSUInteger)relativedIntegerValueWithLength:(NSUInteger)length;
+
 @end

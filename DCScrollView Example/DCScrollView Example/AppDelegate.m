@@ -1,9 +1,9 @@
 //
 //  AppDelegate.m
-//  Demo
+//  DCScrollView Example
 //
-//  Created by Hirohisa Kawasaki on 13/03/29.
-//  Copyright (c) 2013年 Hirohisa Kawasaki. All rights reserved.
+//  Created by Hirohisa Kawasaki on 2014/03/14.
+//  Copyright (c) 2014年 Hirohisa Kawasaki. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -22,20 +22,5 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
-
-- (void)applicationWillResignActive:(UIApplication *)application
-{}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{}
 
 @end
