@@ -103,7 +103,7 @@
 - (void)scrollToPage:(NSInteger)page animated:(BOOL)animated
 {
     NSInteger diff = page - self.page;
-    if (abs(diff)) {
+    if (abs((int)diff)) {
         if (self.focusedCenter) {
             [self changeCellsWithHighlited:NO];
         }
@@ -132,7 +132,7 @@
     // add cells to visibled
     self.visibleCells = [cells mutableCopy];
     int i = 0;
-    for (int index=self.page-[self.scrollView centerPage]; index<=self.page+[self.scrollView centerPage]; index++) {
+    for (NSInteger index=self.page-[self.scrollView centerPage]; index<=self.page+[self.scrollView centerPage]; index++) {
         DCScrollViewNavigationViewCell *cell = [self cellAtIndex:index];
         cell.frame = [self frameForTitleAtIndex:i];
         if (![self.visibleCells containsObject:cell]) {
@@ -207,7 +207,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    int adjust = [scrollView reservingPage] - [scrollView centerPage];
+    int adjust = (int)([scrollView reservingPage] - [scrollView centerPage]);
     _page = self.page + adjust;
     [self renderCells];
     [self scrollToCenterWithAnimated:NO];

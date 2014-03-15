@@ -82,7 +82,7 @@
     if (!cell) {
         cell  = [[DemoDCScrollViewCell alloc] initWithReuseIdentifier:identifier];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"title %d", index];
+    cell.textLabel.text = [NSString stringWithFormat:@"title %ld", (long)index];
     [cell.textLabel sizeToFit];
 
     return cell;
@@ -90,13 +90,13 @@
 
 - (NSString *)titleOfDCScrollViewCellAtIndex:(NSInteger)index
 {
-    return [NSString stringWithFormat:@"title %d", index];
+    return [NSString stringWithFormat:@"title %ld", (long)index];
 }
 
 - (void)dcscrollViewDidScroll:(DCScrollView *)scrollView didChangeVisibleCell:(DCScrollViewCell *)cell atIndex:(NSInteger)index
 {
     DemoDCScrollViewCell *aCell = (DemoDCScrollViewCell *)cell;
-    NSLog(@"index: %d, cell title: %@", index, aCell.textLabel.text);
+    NSLog(@"index: %ld, cell title: %@", (long)index, aCell.textLabel.text);
 }
 
 @end
