@@ -45,7 +45,6 @@
 
         // initialize scrollView
         _scrollView = [[DCScrollViewNavigationViewInnerScrollView alloc] initWithFrame:CGRectZero];
-        self.scrollView.backgroundColor = [UIColor purpleColor];
         self.scrollView.delegate = self;
         self.scrollView.clipsToBounds = NO;
         self.scrollView.pagingEnabled = YES;

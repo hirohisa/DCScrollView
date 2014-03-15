@@ -29,6 +29,7 @@
     int maxContent = (int)self.contentSize.width/self.bounds.size.width;
     return (NSInteger)maxContent/2;
 }
+
 @end
 
 @implementation NSNumber (DCScrollViewLogic)

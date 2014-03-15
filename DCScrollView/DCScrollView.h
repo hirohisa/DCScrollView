@@ -35,17 +35,18 @@
 @end
 
 @interface DCScrollView : UIView
-@property (nonatomic, assign) id <DCScrollViewDataSource> dataSource;
-@property (nonatomic, assign) id <DCScrollViewDelegate> delegate;
-@property (nonatomic, readonly) UIView *titleView;
-@property (nonatomic, readonly) UIScrollView *containerScrollView;
+
 @property (nonatomic, readonly) NSArray *visibleCells;
 @property (nonatomic, readonly) DCScrollViewCell *currentCell;
 @property (nonatomic) BOOL focusedCenter;
 
+@property (nonatomic, assign) id <DCScrollViewDataSource> dataSource;
+@property (nonatomic, assign) id <DCScrollViewDelegate> delegate;
+
 - (id)dequeueReusableCellWithIdentifier:(NSString *)identifier;
 - (void)reloadData;
-- (void)clear; // clear Caches
+- (void)clearData; // clear Cache
 
 - (void)setFont:(UIFont *)font textColor:(UIColor *)textColor highlightedTextColor:(UIColor *)highlightedTextColor;
+
 @end

@@ -19,22 +19,28 @@
 @end
 
 @interface DCScrollView ()
-<UIScrollViewDelegate, DCScrollViewNavigationViewDelegate, DCScrollViewNavigationViewDataSource, DCScrollViewContentViewDataSource, DCScrollViewContentViewDelegate>
-@property (nonatomic) BOOL touchedBody;
-@property (nonatomic, readonly) DCScrollViewNavigationView *headScrollView;
-@property (nonatomic, readonly) DCScrollViewContentView *bodyScrollView;
 
-@property (nonatomic, strong) NSMutableDictionary *reusableCells;
-@property (nonatomic, strong) NSMutableArray *visibleCells;
+<
+UIScrollViewDelegate,
+DCScrollViewNavigationViewDelegate, DCScrollViewNavigationViewDataSource,
+DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
+>
 
-@property (nonatomic, readonly) UIView *headBackgroundView;
+@property (nonatomic) BOOL touchedContentView;
+
+@property (nonatomic, readonly) DCScrollViewNavigationView *navigationView;
+@property (nonatomic, readonly) DCScrollViewContentView *contentView;
+
+@property (nonatomic, readonly) NSMutableDictionary *reusableCells;
 
 @property (nonatomic, strong) UIFont *font;
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, strong) UIColor *highlightedTextColor;
+
 @end
 
 @implementation DCScrollView
+
 - (id)init
 {
     return [self initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -42,7 +48,8 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    if ((self = [super initWithFrame:frame])) {
+    self = [super initWithFrame:frame];
+    if (self) {
         _reusableCells = [@{} mutableCopy];
         self.clipsToBounds = YES;
         self.backgroundColor = [UIColor whiteColor];
@@ -52,43 +59,33 @@
 
 #pragma mark - accessor
 
-- (UIView *)titleView
-{
-    return self.headBackgroundView;
-}
-
-- (UIScrollView *)containerScrollView
-{
-    return (UIScrollView *)self.bodyScrollView;
-}
-
 - (NSArray *)visibleCells
 {
     NSMutableArray *cells = [@[] mutableCopy];
-    if (self.bodyScrollView.previousCell) {
-        [cells addObject:self.bodyScrollView.previousCell];
+    if (self.contentView.previousCell) {
+        [cells addObject:self.contentView.previousCell];
     }
-    if (self.bodyScrollView.currentCell) {
-        [cells addObject:self.bodyScrollView.currentCell];
+    if (self.contentView.currentCell) {
+        [cells addObject:self.contentView.currentCell];
     }
-    if (self.bodyScrollView.nextCell) {
-        [cells addObject:self.bodyScrollView.nextCell];
+    if (self.contentView.nextCell) {
+        [cells addObject:self.contentView.nextCell];
     }
     return [cells copy];
 }
 
 - (DCScrollViewCell *)currentCell
 {
-    return self.bodyScrollView.currentCell;
+    return self.contentView.currentCell;
 }
 
 #pragma mark - initialize
 
 - (void)_initialize
 {
-    // head
+    // navigation
     CGRect frame;
-    if (!self.headScrollView) {
+    if (!self.navigationView) {
         frame = (CGRect) {
             .origin.x = 0,
             .origin.y = 0,
@@ -100,28 +97,29 @@
             .origin.y = 0,
             .size     = [self sizeOfCellInDCScrollViewNavigationView]
         };
-        _headScrollView = [[DCScrollViewNavigationView alloc] initWithFrame:frame frameAtScrollView:frameAtScrollView];
-        self.headScrollView.focusedCenter = self.focusedCenter;
-        self.headScrollView.delegate = self;
-        self.headScrollView.dataSource = self;
-        [self addSubview:self.headScrollView];
+        _navigationView = [[DCScrollViewNavigationView alloc] initWithFrame:frame frameAtScrollView:frameAtScrollView];
+        self.navigationView.focusedCenter = self.focusedCenter;
+        self.navigationView.delegate = self;
+        self.navigationView.dataSource = self;
+        [self addSubview:self.navigationView];
     }
-    // body
-    if (!self.bodyScrollView) {
+
+    // content
+    if (!self.contentView) {
         frame = (CGRect) {
             .origin.x = 0,
-            .origin.y = CGRectGetMaxY(self.headScrollView.frame),
+            .origin.y = CGRectGetMaxY(self.navigationView.frame),
             .size.width = CGRectGetWidth(self.frame),
-            .size.height = CGRectGetHeight(self.frame) - CGRectGetHeight(self.headScrollView.frame)
+            .size.height = CGRectGetHeight(self.frame) - CGRectGetHeight(self.navigationView.frame)
         };
-        _bodyScrollView = [[DCScrollViewContentView alloc]initWithFrame:frame];
-        self.bodyScrollView.delegate = self;
-        self.bodyScrollView.dcDelegate = self;
-        self.bodyScrollView.dataSource = self;
-        self.bodyScrollView.pagingEnabled = YES;
-        self.bodyScrollView.showsHorizontalScrollIndicator = NO;
-        self.bodyScrollView.showsVerticalScrollIndicator   = NO;
-        [self addSubview:self.bodyScrollView];
+        _contentView = [[DCScrollViewContentView alloc]initWithFrame:frame];
+        self.contentView.delegate = self;
+        self.contentView.dcDelegate = self;
+        self.contentView.dataSource = self;
+        self.contentView.pagingEnabled = YES;
+        self.contentView.showsHorizontalScrollIndicator = NO;
+        self.contentView.showsVerticalScrollIndicator   = NO;
+        [self addSubview:self.contentView];
     }
     [self reloadData];
 }
@@ -129,11 +127,11 @@
 - (id)dequeueReusableCellWithIdentifier:(NSString *)identifier
 {
     if (identifier &&
-        [self.reusableCells objectForKey:identifier] &&
-        [[self.reusableCells objectForKey:identifier] count]) {
+        self.reusableCells[identifier] &&
+        [self.reusableCells[identifier] count]) {
 
-        id cell = [[self.reusableCells objectForKey:identifier] lastObject];
-        [[self.reusableCells objectForKey:identifier] removeLastObject];
+        id cell = [self.reusableCells[identifier] lastObject];
+        [self.reusableCells[identifier] removeLastObject];
         return cell;
     }
     return nil;
@@ -141,10 +139,10 @@
 
 - (void)recycleCellIntoReusableQueue:(DCScrollViewCell *)cell
 {
-    if (![self.reusableCells objectForKey:cell.reuseIdentifier]) {
-        [self.reusableCells setObject:[@[] mutableCopy] forKey:cell.reuseIdentifier];
+    if (!self.reusableCells[cell.reuseIdentifier]) {
+        self.reusableCells[cell.reuseIdentifier] = [@[] mutableCopy];
     }
-    [[self.reusableCells objectForKey:cell.reuseIdentifier] addObject:cell];
+    [self.reusableCells[cell.reuseIdentifier] addObject:cell];
 }
 
 - (void)setDataSource:(id<DCScrollViewDataSource>)dataSource
@@ -165,9 +163,8 @@
 
 - (void)setFrame:(CGRect)frame
 {
-    BOOL changeFromZero = CGRectEqualToRect(self.frame, CGRectZero);
     [super setFrame:frame];
-    if (changeFromZero && [self validateToInitialize]) {
+    if ([self validateToInitialize]) {
         [self _initialize];
     }
 }
@@ -179,15 +176,15 @@
 
 - (void)reloadData
 {
-    [self clear];
-    [self.headScrollView reloadData];
-    [self.bodyScrollView reloadData];
+    [self clearData];
+    [self.navigationView reloadData];
+    [self.contentView reloadData];
 }
 
-- (void)clear
+- (void)clearData
 {
-    self.touchedBody = NO;
-    self.reusableCells = [@{} mutableCopy];
+    self.touchedContentView = NO;
+    _reusableCells = [@{} mutableCopy];
 }
 
 - (void)setFont:(UIFont *)font textColor:(UIColor *)textColor highlightedTextColor:(UIColor *)highlightedTextColor
@@ -195,7 +192,7 @@
     self.font = font;
     self.textColor = textColor;
     self.highlightedTextColor = highlightedTextColor;
-    [self.headScrollView reloadData];
+    [self.navigationView reloadData];
 }
 
 #pragma mark - touch
@@ -203,43 +200,39 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
-    self.touchedBody = [touch.view isEqual:self.bodyScrollView];
+    self.touchedContentView = [touch.view isEqual:self.contentView];
 }
 
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if ([scrollView isEqual:self.bodyScrollView]) {
-        int adjust = 0;
-        if ([scrollView reservingPage] == 0) {
-            adjust = -1;
-        } else if ([scrollView reservingPage] == 2) {
-            adjust = 1;
-        }
-        self.touchedBody = YES;
-        [self.headScrollView scrollToPage:(self.bodyScrollView.page + adjust) animated:YES];
-        [self.bodyScrollView renderCells];
+    int adjust = 0;
+    if ([scrollView reservingPage] == 0) {
+        adjust = -1;
+    } else if ([scrollView reservingPage] == 2) {
+        adjust = 1;
     }
+    self.touchedContentView = YES;
+    [self.navigationView scrollToPage:(self.contentView.page + adjust) animated:YES];
+    [self.contentView renderCells];
 }
 
 - (void)dcscrollViewNavigationViewDidEndScrollingAnimation:(DCScrollViewNavigationView *)navigationView
 {
-    if ([navigationView isEqual:self.headScrollView]) {
-        if (!self.touchedBody) {
-            self.bodyScrollView.page = self.headScrollView.page;
-        }
+    if (!self.touchedContentView) {
+        self.contentView.page = self.navigationView.page;
     }
-    self.touchedBody = ![navigationView isEqual:self.headScrollView];
+    self.touchedContentView = NO;
 }
 
 - (void)dcscrollViewNavigationViewDidEndDecelerating:(DCScrollViewNavigationView *)navigationView
 {
-    self.bodyScrollView.page = self.headScrollView.page;
-    self.touchedBody = ![navigationView isEqual:self.headScrollView];
+    self.contentView.page = self.navigationView.page;
+    self.touchedContentView = NO;
 }
 
-#pragma mark - DCBodyScrollViewDataSource
+#pragma mark - DCScrollViewContentViewDataSource
 
 - (DCScrollViewCell *)dcscrollViewContentView:(DCScrollViewContentView *)contentView cellAtIndex:(NSInteger)index
 {
@@ -256,6 +249,8 @@
 {
     [self recycleCellIntoReusableQueue:cell];
 }
+
+#pragma mark - DCScrollViewContentViewDelegate
 
 - (void)dcscrollViewContentView:(DCScrollViewContentView *)contentView didChangeVisibleCellAtIndex:(NSInteger)index
 {
