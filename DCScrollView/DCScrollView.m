@@ -8,233 +8,7 @@
 #import "DCScrollView.h"
 #import "DCScrollView+Logic.h"
 
-@class DCScrollViewNavigationView, DCScrollViewNavigationViewCell;
-
-@protocol DCScrollViewNavigationViewDelegate <NSObject>
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView;
-
-@end
-
-@protocol DCScrollViewNavigationViewDataSource <NSObject>
-
-- (NSInteger)numberOfCellsInDCScrollViewNavigationView:(DCScrollViewNavigationView *)navigationView;
-- (DCScrollViewNavigationViewCell *)dcscrollViewNavigationView:(DCScrollViewNavigationView *)navigationView cellAtIndex:(NSInteger)index;
-
-@end
-
-@interface DCScrollViewNavigationView : UIScrollView <UIScrollViewDelegate>
-
-@property (nonatomic, assign) id<DCScrollViewNavigationViewDelegate> dcDelegate;
-@property (nonatomic, assign) id<DCScrollViewNavigationViewDataSource> dataSource;
-@property (nonatomic, strong) NSMutableArray *visibleCells;
-@property (nonatomic, readonly) NSInteger page;
-@property (nonatomic) BOOL focusedCenter;
-
-@property (nonatomic) BOOL touched;
-
-- (void)scrollToPage:(NSInteger)page animated:(BOOL)animated;
-
-@end
-
-@implementation DCScrollViewNavigationView
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.delegate = self;
-        self.clipsToBounds = NO;
-        self.pagingEnabled = YES;
-        self.showsHorizontalScrollIndicator = NO;
-        self.scrollsToTop = NO;
-        self.focusedCenter = NO;
-    }
-    return self;
-}
-
-#pragma mark - generate
-
-- (DCScrollViewNavigationViewCell *)cellAtIndex:(NSInteger)index
-{
-    for (DCScrollViewNavigationViewCell *cell in self.visibleCells) {
-        if (cell.index == index) {
-            return cell;
-        }
-    }
-
-    NSUInteger length = [self.dataSource numberOfCellsInDCScrollViewNavigationView:self];
-    NSInteger relativedIndex = [@(index) relativedIntegerValueWithLength:length];
-    DCScrollViewNavigationViewCell *cell = [self.dataSource dcscrollViewNavigationView:self cellAtIndex:relativedIndex];
-    cell.index = index;
-
-    return cell;
-}
-
-#pragma mark - reloadData
-
-- (void)reloadData
-{
-    for (DCScrollViewNavigationViewCell *cell in self.visibleCells) {
-        [cell removeFromSuperview];
-    }
-    self.visibleCells = [@[] mutableCopy];
-
-    NSUInteger length = ([self.dataSource numberOfCellsInDCScrollViewNavigationView:self] > 1)?11:1;
-    self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * length, CGRectGetHeight(self.frame));
-    [self renderCells];
-    CGFloat x = CGRectGetWidth(self.bounds) * ([self centerPage]);
-    [self setContentOffset:CGPointMake(x, 0) animated:NO];
-}
-
-- (void)scrollToPage:(NSInteger)page animated:(BOOL)animated
-{
-    NSInteger diff = page - self.page;
-    if (abs(diff)) {
-        if (self.focusedCenter) {
-            [self changeCellsWithHighlited:NO];
-        }
-        if ([self.dataSource numberOfCellsInDCScrollViewNavigationView:self] > 1) {
-            CGFloat x = CGRectGetWidth(self.bounds) * diff;
-            [self setContentOffset:CGPointMake(self.contentOffset.x + x, 0) animated:YES];
-        }
-        _page = page;
-    }
-}
-
-#pragma mark - rendering
-
-- (void)renderCells
-{
-    NSMutableArray *cells = [@[] mutableCopy];
-    // remove not visibled cells
-    for (DCScrollViewNavigationViewCell *cell in self.visibleCells) {
-        if (cell.index < self.page-[self centerPage] || cell.index > self.page+[self centerPage]) {
-            [cell removeFromSuperview];
-        } else {
-            [cells addObject:cell];
-        }
-    }
-
-    // add cells to visibled
-    self.visibleCells = [cells mutableCopy];
-    int i = 0;
-    for (int index=self.page-[self centerPage]; index<=self.page+[self centerPage]; index++) {
-        DCScrollViewNavigationViewCell *cell = [self cellAtIndex:index];
-        cell.frame = [self frameForTitleAtIndex:i];
-        if (![self.visibleCells containsObject:cell]) {
-            [self.visibleCells addObject:cell];
-        }
-        if (![cell isDescendantOfView:self]) {
-            [self addSubview:cell];
-        }
-        i++;
-    }
-    [self switchHighlited];
-}
-
-- (CGRect)frameForTitleAtIndex:(NSInteger)index
-{
-    CGSize size = self.bounds.size;
-    return (CGRect) {
-        .origin.x = (size.width) * (index),
-        .origin.y = 0,
-        .size     = size
-    };
-}
-
-- (void)changeCellsWithHighlited:(BOOL)highlited
-{
-    for (DCScrollViewNavigationViewCell *cell in self.visibleCells) {
-        cell.highlighted = highlited;
-    }
-}
-
-- (void)switchHighlited
-{
-    for (DCScrollViewNavigationViewCell *cell in self.visibleCells) {
-        cell.highlighted = (cell.index == self.page);
-    }
-}
-
-#pragma mark - UIResponder
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    self.touched = YES;
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    self.touched = NO;
-    CGPoint point = [[touches anyObject] locationInView:self];
-    if ([self.dataSource numberOfCellsInDCScrollViewNavigationView:self] > 1) {
-        NSInteger touchedPage = [self convertToPageWithOffsetX:point.x];
-        if (touchedPage > [self centerPage]) {
-            [self scrollToPage:self.page+1 animated:YES];
-        } else if (touchedPage < [self centerPage]) {
-            [self scrollToPage:self.page-1 animated:YES];
-        }
-    }
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    self.touched = NO;
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    self.touched = NO;
-}
-
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView.contentOffset.y) {
-        scrollView.contentOffset = (CGPoint) {
-            .x = scrollView.contentOffset.x,
-            .y = 0
-        };
-    }
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    if (self.focusedCenter) {
-        [self changeCellsWithHighlited:NO];
-    }
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    int adjust = [scrollView reservingPage] - [scrollView centerPage];
-    _page = self.page + adjust;
-    [self renderCells];
-    [self scrollToCenterWithAnimated:NO];
-    if ([self.dcDelegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
-        [self.dcDelegate scrollViewDidEndDecelerating:scrollView];
-    }
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
-{
-    [self renderCells];
-    [self scrollToCenterWithAnimated:NO];
-    if ([self.dcDelegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)]) {
-        [self.dcDelegate scrollViewDidEndScrollingAnimation:scrollView];
-    }
-}
-
-- (void)scrollToCenterWithAnimated:(BOOL)animated
-{
-    CGFloat x = CGRectGetWidth(self.bounds) * ([self centerPage]);
-    [self setContentOffset:CGPointMake(x, 0) animated:animated];
-}
-
-@end
+#import "DCScrollViewNavigationView.h"
 
 @class DCScrollViewContentView;
 
@@ -554,34 +328,23 @@
 {
     // head
     CGRect frame;
-    if (!self.headBackgroundView) {
-        frame = (CGRect) {
-            .origin.x = 0,
-            .origin.y = 0,
-            .size.width = CGRectGetWidth(self.bounds),
-            .size.height =  [self sizeOfCellInDCScrollViewNavigationView].height
-        };
-        _headBackgroundView = [[UIView alloc] initWithFrame:frame];
-        [self addSubview:self.headBackgroundView];
-    }
     if (!self.headScrollView) {
         frame = (CGRect) {
             .origin.x = 0,
             .origin.y = 0,
+            .size.width  = CGRectGetWidth(self.bounds),
+            .size.height = [self sizeOfCellInDCScrollViewNavigationView].height
+        };
+        CGRect frameAtScrollView = (CGRect) {
+            .origin.x = 0,
+            .origin.y = 0,
             .size     = [self sizeOfCellInDCScrollViewNavigationView]
         };
-        _headScrollView = [[DCScrollViewNavigationView alloc]initWithFrame:frame];
-        self.headScrollView.center = (CGPoint) {
-            .x = CGRectGetWidth(self.frame)/2,
-            .y = CGRectGetHeight(self.headScrollView.frame)/2
-        };
+        _headScrollView = [[DCScrollViewNavigationView alloc] initWithFrame:frame frameAtScrollView:frameAtScrollView];
         self.headScrollView.focusedCenter = self.focusedCenter;
-        self.headScrollView.dcDelegate = self;
+        self.headScrollView.delegate = self;
         self.headScrollView.dataSource = self;
-        self.headScrollView.pagingEnabled = YES;
-        self.headScrollView.showsHorizontalScrollIndicator = NO;
-        self.headScrollView.showsVerticalScrollIndicator   = NO;
-        [self.headBackgroundView addSubview:self.headScrollView];
+        [self addSubview:self.headScrollView];
     }
     // body
     if (!self.bodyScrollView) {
@@ -677,14 +440,6 @@
 
 #pragma mark - touch
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
-    if ([self.headBackgroundView pointInside:point withEvent:event]) {
-        return self.headScrollView;
-    }
-    return [super hitTest:point withEvent:event];
-}
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
@@ -708,20 +463,20 @@
     }
 }
 
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+- (void)dcscrollViewNavigationViewDidEndScrollingAnimation:(DCScrollViewNavigationView *)navigationView
 {
-    if ([scrollView isEqual:self.headScrollView]) {
+    if ([navigationView isEqual:self.headScrollView]) {
         if (!self.touchedBody) {
             self.bodyScrollView.page = self.headScrollView.page;
         }
     }
-    self.touchedBody = ![scrollView isEqual:self.headScrollView];
+    self.touchedBody = ![navigationView isEqual:self.headScrollView];
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+- (void)dcscrollViewNavigationViewDidEndDecelerating:(DCScrollViewNavigationView *)navigationView
 {
     self.bodyScrollView.page = self.headScrollView.page;
-    self.touchedBody = ![scrollView isEqual:self.headScrollView];
+    self.touchedBody = ![navigationView isEqual:self.headScrollView];
 }
 
 #pragma mark - DCBodyScrollViewDataSource
