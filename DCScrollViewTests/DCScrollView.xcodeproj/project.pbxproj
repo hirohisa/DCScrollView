@@ -12,10 +12,10 @@
 		65D142F618D2A63400886B28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D142F518D2A63400886B28 /* UIKit.framework */; };
 		65D142FF18D2A63400886B28 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65D142FD18D2A63400886B28 /* InfoPlist.strings */; };
 		65D1430118D2A63400886B28 /* DCScrollViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1430018D2A63400886B28 /* DCScrollViewTests.m */; };
-		65D1431318D2A74D00886B28 /* DCScrollView+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1430C18D2A74D00886B28 /* DCScrollView+Logic.m */; };
-		65D1431418D2A74D00886B28 /* DCScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1430E18D2A74D00886B28 /* DCScrollView.m */; };
-		65D1431518D2A74D00886B28 /* DCScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1431018D2A74D00886B28 /* DCScrollViewCell.m */; };
-		65D1431618D2A74D00886B28 /* DCTitleScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1431218D2A74D00886B28 /* DCTitleScrollViewCell.m */; };
+		A10FA6B018D4CE5800A991C6 /* DCScrollView+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = A10FA6A918D4CE5800A991C6 /* DCScrollView+Logic.m */; };
+		A10FA6B118D4CE5800A991C6 /* DCScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A10FA6AB18D4CE5800A991C6 /* DCScrollView.m */; };
+		A10FA6B218D4CE5800A991C6 /* DCScrollViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A10FA6AD18D4CE5800A991C6 /* DCScrollViewContentView.m */; };
+		A10FA6B318D4CE5800A991C6 /* DCScrollViewNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A10FA6AF18D4CE5800A991C6 /* DCScrollViewNavigationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,14 +26,14 @@
 		65D142FC18D2A63400886B28 /* DCScrollViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DCScrollViewTests-Info.plist"; sourceTree = "<group>"; };
 		65D142FE18D2A63400886B28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		65D1430018D2A63400886B28 /* DCScrollViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewTests.m; sourceTree = "<group>"; };
-		65D1430B18D2A74D00886B28 /* DCScrollView+Logic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCScrollView+Logic.h"; sourceTree = "<group>"; };
-		65D1430C18D2A74D00886B28 /* DCScrollView+Logic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCScrollView+Logic.m"; sourceTree = "<group>"; };
-		65D1430D18D2A74D00886B28 /* DCScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollView.h; sourceTree = "<group>"; };
-		65D1430E18D2A74D00886B28 /* DCScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollView.m; sourceTree = "<group>"; };
-		65D1430F18D2A74D00886B28 /* DCScrollViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollViewCell.h; sourceTree = "<group>"; };
-		65D1431018D2A74D00886B28 /* DCScrollViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewCell.m; sourceTree = "<group>"; };
-		65D1431118D2A74D00886B28 /* DCTitleScrollViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTitleScrollViewCell.h; sourceTree = "<group>"; };
-		65D1431218D2A74D00886B28 /* DCTitleScrollViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTitleScrollViewCell.m; sourceTree = "<group>"; };
+		A10FA6A818D4CE5800A991C6 /* DCScrollView+Logic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCScrollView+Logic.h"; sourceTree = "<group>"; };
+		A10FA6A918D4CE5800A991C6 /* DCScrollView+Logic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCScrollView+Logic.m"; sourceTree = "<group>"; };
+		A10FA6AA18D4CE5800A991C6 /* DCScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollView.h; sourceTree = "<group>"; };
+		A10FA6AB18D4CE5800A991C6 /* DCScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollView.m; sourceTree = "<group>"; };
+		A10FA6AC18D4CE5800A991C6 /* DCScrollViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollViewContentView.h; sourceTree = "<group>"; };
+		A10FA6AD18D4CE5800A991C6 /* DCScrollViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewContentView.m; sourceTree = "<group>"; };
+		A10FA6AE18D4CE5800A991C6 /* DCScrollViewNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollViewNavigationView.h; sourceTree = "<group>"; };
+		A10FA6AF18D4CE5800A991C6 /* DCScrollViewNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewNavigationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +53,7 @@
 		65D142D818D2A63400886B28 = {
 			isa = PBXGroup;
 			children = (
-				65D1430A18D2A74D00886B28 /* DCScrollView */,
+				A10FA6A718D4CE5800A991C6 /* DCScrollView */,
 				65D142FA18D2A63400886B28 /* DCScrollViewTests */,
 				65D142E318D2A63400886B28 /* Frameworks */,
 				65D142E218D2A63400886B28 /* Products */,
@@ -96,17 +96,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		65D1430A18D2A74D00886B28 /* DCScrollView */ = {
+		A10FA6A718D4CE5800A991C6 /* DCScrollView */ = {
 			isa = PBXGroup;
 			children = (
-				65D1430B18D2A74D00886B28 /* DCScrollView+Logic.h */,
-				65D1430C18D2A74D00886B28 /* DCScrollView+Logic.m */,
-				65D1430D18D2A74D00886B28 /* DCScrollView.h */,
-				65D1430E18D2A74D00886B28 /* DCScrollView.m */,
-				65D1430F18D2A74D00886B28 /* DCScrollViewCell.h */,
-				65D1431018D2A74D00886B28 /* DCScrollViewCell.m */,
-				65D1431118D2A74D00886B28 /* DCTitleScrollViewCell.h */,
-				65D1431218D2A74D00886B28 /* DCTitleScrollViewCell.m */,
+				A10FA6A818D4CE5800A991C6 /* DCScrollView+Logic.h */,
+				A10FA6A918D4CE5800A991C6 /* DCScrollView+Logic.m */,
+				A10FA6AA18D4CE5800A991C6 /* DCScrollView.h */,
+				A10FA6AB18D4CE5800A991C6 /* DCScrollView.m */,
+				A10FA6AC18D4CE5800A991C6 /* DCScrollViewContentView.h */,
+				A10FA6AD18D4CE5800A991C6 /* DCScrollViewContentView.m */,
+				A10FA6AE18D4CE5800A991C6 /* DCScrollViewNavigationView.h */,
+				A10FA6AF18D4CE5800A991C6 /* DCScrollViewNavigationView.m */,
 			);
 			name = DCScrollView;
 			path = ../DCScrollView;
@@ -175,10 +175,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				65D1430118D2A63400886B28 /* DCScrollViewTests.m in Sources */,
-				65D1431418D2A74D00886B28 /* DCScrollView.m in Sources */,
-				65D1431618D2A74D00886B28 /* DCTitleScrollViewCell.m in Sources */,
-				65D1431518D2A74D00886B28 /* DCScrollViewCell.m in Sources */,
-				65D1431318D2A74D00886B28 /* DCScrollView+Logic.m in Sources */,
+				A10FA6B118D4CE5800A991C6 /* DCScrollView.m in Sources */,
+				A10FA6B018D4CE5800A991C6 /* DCScrollView+Logic.m in Sources */,
+				A10FA6B318D4CE5800A991C6 /* DCScrollViewNavigationView.m in Sources */,
+				A10FA6B218D4CE5800A991C6 /* DCScrollViewContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

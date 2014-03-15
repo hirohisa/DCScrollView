@@ -7,7 +7,6 @@
 
 #import "DCScrollViewNavigationView.h"
 #import "DCScrollView+Logic.h"
-#import "DCScrollViewNavigationViewCell.h"
 
 
 @interface DCScrollViewNavigationViewInnerScrollView : UIScrollView

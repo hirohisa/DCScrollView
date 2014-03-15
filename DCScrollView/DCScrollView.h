@@ -6,10 +6,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DCScrollViewCell.h"
-#import "DCScrollViewNavigationViewCell.h"
 
 @class DCScrollView;
+
+@interface DCScrollViewNavigationViewCell : UIView
+
+@property (nonatomic) NSInteger index;
+@property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, getter=isHighlighted) BOOL highlighted;
+
+@end
+
+@interface DCScrollViewCell : UIView
+
+@property (nonatomic, readonly) NSString *reuseIdentifier;
+
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+
+@end
 
 @protocol DCScrollViewDataSource <NSObject>
 
