@@ -58,6 +58,7 @@
 @property (nonatomic, assign) id <DCScrollViewDelegate> delegate;
 
 - (id)dequeueReusableCellWithIdentifier:(NSString *)identifier;
+
 - (void)reloadData;
 - (void)clearData; // clear Cache
 
