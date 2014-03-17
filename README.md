@@ -1,7 +1,7 @@
 DCScrollView [![Build Status](https://travis-ci.org/hirohisa/DCScrollView.png?branch=master)](https://travis-ci.org/hirohisa/DCScrollView)
 ==================
 
-DCScrollView is an extension of UIScrollView that scrolling through the body, the title scrolls with a delay like Etsy app for iOS.
+DCScrollView is an extension of UIScrollView that scrolling through the content, the title scrolls with a delay like Etsy app for iOS.
 
 ![screenshot](https://raw.github.com/hirohisa/DCScrollView/master/DCScrollView Example/screenshot1.png)
 
@@ -42,7 +42,26 @@ DCScrollViewDelegate and DCScrollViewDataSource are like UITableViewDelegate and
 
 ```
 
-#### Example
+### Reload
+
+Reset cells and redisplays visible cells. Current page keep visible after reloading.
+
+```objc
+- (void)reloadData;
+```
+
+### Remove Cache
+
+If UIViewController received memory warnings, control to clear the memory that DCScrollView has.
+
+```objc
+- (void)clearData;
+```
+
+Example
+----------
+
+### UIViewController
 
 ```objc
 
@@ -76,23 +95,6 @@ DCScrollViewDelegate and DCScrollViewDataSource are like UITableViewDelegate and
     return @"title";
 }
 
-```
-
-
-### Reload
-
-Reset cells and redisplays visible cells. Current page keep visible after reloading.
-
-```objc
-- (void)reloadData;
-```
-
-### Remove Cache
-
-If UIViewController received memory warnings, control to clear the memory that DCScrollView has.
-
-```objc
-- (void)clearData;
 ```
 
 
