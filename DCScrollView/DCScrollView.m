@@ -106,12 +106,6 @@
 //
 //
 
-@interface DCScrollViewContentView ()
-
-- (void)renderCells;
-
-@end
-
 @interface DCScrollView ()
 
 <
@@ -133,25 +127,12 @@ DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
 
 @end
 
-@implementation DCScrollView
+//
+// DCScrollView's subViews
+//
+//
 
-- (id)init
-{
-    return [self initWithFrame:[[UIScreen mainScreen] bounds]];
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        _reusableCells = [@{} mutableCopy];
-        self.clipsToBounds = YES;
-        self.backgroundColor = [UIColor whiteColor];
-    }
-    return self;
-}
-
-#pragma mark - accessor
+@implementation DCScrollView (SubViews)
 
 - (NSArray *)visibleCells
 {
@@ -171,6 +152,32 @@ DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
 - (DCScrollViewCell *)currentCell
 {
     return self.contentView.currentCell;
+}
+
+@end
+
+
+//
+// implementation DCScrollView
+//
+//
+
+@implementation DCScrollView
+
+- (id)init
+{
+    return [self initWithFrame:[[UIScreen mainScreen] bounds]];
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        _reusableCells = [@{} mutableCopy];
+        self.clipsToBounds = YES;
+        self.backgroundColor = [UIColor whiteColor];
+    }
+    return self;
 }
 
 #pragma mark - initialize
@@ -208,7 +215,6 @@ DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
         };
         _contentView = [[DCScrollViewContentView alloc]initWithFrame:frame];
         self.contentView.delegate = self;
-        self.contentView.dcDelegate = self;
         self.contentView.dataSource = self;
         self.contentView.pagingEnabled = YES;
         self.contentView.showsHorizontalScrollIndicator = NO;
@@ -257,8 +263,9 @@ DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
 
 - (void)setFrame:(CGRect)frame
 {
+    BOOL changeFromZero = CGRectEqualToRect(self.frame, CGRectZero);
     [super setFrame:frame];
-    if ([self validateToInitialize]) {
+    if (changeFromZero && [self validateToInitialize]) {
         [self _initialize];
     }
 }
@@ -299,17 +306,16 @@ DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)dcscrollViewContentViewDidScroll:(DCScrollViewContentView *)contentView
 {
     int adjust = 0;
-    if ([scrollView reservingPage] == 0) {
+    if ([contentView reservingPage] == 0) {
         adjust = -1;
-    } else if ([scrollView reservingPage] == 2) {
+    } else if ([contentView reservingPage] == 2) {
         adjust = 1;
     }
     self.touchedContentView = YES;
     [self.navigationView scrollToPage:(self.contentView.page + adjust) animated:YES];
-    [self.contentView renderCells];
 }
 
 - (void)dcscrollViewNavigationViewDidEndScrollingAnimation:(DCScrollViewNavigationView *)navigationView

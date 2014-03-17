@@ -17,9 +17,10 @@
 
 @end
 
-@protocol DCScrollViewContentViewDelegate <NSObject>
+@protocol DCScrollViewContentViewDelegate <UIScrollViewDelegate>
 
 - (void)dcscrollViewContentView:(DCScrollViewContentView *)contentView didChangeVisibleCellAtIndex:(NSInteger)index;
+- (void)dcscrollViewContentViewDidScroll:(DCScrollViewContentView *)contentView;
 
 @end
 
@@ -32,7 +33,7 @@
 @property (nonatomic, assign) DCScrollViewCell *nextCell;
 
 @property (nonatomic, assign) id<DCScrollViewContentViewDataSource> dataSource;
-@property (nonatomic, assign) id<DCScrollViewContentViewDelegate> dcDelegate;
+@property (nonatomic, assign) id<DCScrollViewContentViewDelegate> delegate;
 
 - (void)reloadData;
 

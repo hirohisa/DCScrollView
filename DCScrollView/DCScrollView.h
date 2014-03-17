@@ -50,8 +50,6 @@
 
 @interface DCScrollView : UIView
 
-@property (nonatomic, readonly) NSArray *visibleCells;
-@property (nonatomic, readonly) DCScrollViewCell *currentCell;
 @property (nonatomic) BOOL focusedCenter;
 
 @property (nonatomic, assign) id <DCScrollViewDataSource> dataSource;
@@ -63,5 +61,15 @@
 - (void)clearData; // clear Cache
 
 - (void)setFont:(UIFont *)font textColor:(UIColor *)textColor highlightedTextColor:(UIColor *)highlightedTextColor;
+
+@end
+
+@interface DCScrollView (SubViews)
+
+@property (nonatomic, readonly) NSArray *visibleCells;
+@property (nonatomic, readonly) DCScrollViewCell *currentCell;
+
+@property (nonatomic, readonly) UIView *navigationView;
+@property (nonatomic, readonly) UIScrollView *contentView;
 
 @end

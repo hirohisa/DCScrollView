@@ -8,7 +8,10 @@
 #import "DCScrollViewContentView.h"
 #import "DCScrollView+Logic.h"
 
-@interface DCScrollViewContentView ()
+@interface DCScrollViewContentView () <UIScrollViewDelegate> {
+    @package
+    id _delegate;
+}
 
 @end
 
@@ -18,17 +21,31 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.showsHorizontalScrollIndicator = NO;
-        self.scrollsToTop = NO;
+        [self dcscrollViewContentView_configure];
     }
     return self;
+}
+
+- (void)dcscrollViewContentView_configure
+{
+    self.showsHorizontalScrollIndicator = NO;
+    self.scrollsToTop = NO;
+    [super setDelegate:self];
+}
+
+- (void)dealloc
+{
+    self->_delegate = nil;
 }
 
 #pragma mark - public
 
 - (void)reloadData
 {
-    [self _initialize];
+    if (self->_delegate &&
+        self.dataSource) {
+        [self _initialize];
+    }
 }
 
 #pragma mark - accessor
@@ -39,6 +56,16 @@
         _page = page;
         [self reloadData];
     }
+}
+
+- (void)setDelegate:(id<DCScrollViewContentViewDelegate>)delegate
+{
+    self->_delegate = delegate;
+}
+
+- (id<DCScrollViewContentViewDelegate>)delegate
+{
+    return self->_delegate;
 }
 
 #pragma mark - enqueue
@@ -217,8 +244,17 @@
 - (void)delegateDidChangeVisibleCell
 {
     if (self.currentCell) {
-        [self.dcDelegate dcscrollViewContentView:self didChangeVisibleCellAtIndex:[self indexRelativedForIndex:self.page]];
+        [self.delegate dcscrollViewContentView:self didChangeVisibleCellAtIndex:[self indexRelativedForIndex:self.page]];
     }
+}
+
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self renderCells];
+    [self.delegate dcscrollViewContentViewDidScroll:self];
 }
 
 @end
