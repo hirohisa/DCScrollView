@@ -6,6 +6,20 @@ DCScrollView is an extension of UIScrollView that scrolling through the content,
 ![screenshot](https://raw.github.com/hirohisa/DCScrollView/master/DCScrollView Example/screenshot1.png)
 
 
+Installation
+----------
+
+There are two ways to use this in your project:
+
+- Copy `DCScrollView/*.{h.m}` into your project
+
+- Install with CocoaPods to write Podfile
+```ruby
+platform :ios
+pod 'DCScrollView',  '~> 1.1.0'
+```
+
+
 Usage
 ----------
 
@@ -14,33 +28,6 @@ Usage
 DCScrollView uses a simple methodology. It defines a delegate and a data source, its client implement.
 DCScrollViewDelegate and DCScrollViewDataSource are like UITableViewDelegate and UITableViewDatasource.
 
-```objc
-
-
-@protocol DCScrollViewDataSource <NSObject>
-
-@required
-
-- (NSInteger)numberOfCellsInDCScrollView:(DCScrollView *)scrollView;
-- (DCScrollViewCell *)dcscrollView:(DCScrollView *)scrollView cellAtIndex:(NSInteger)index;
-
-@optional
-
-- (NSString *)titleOfDCScrollViewCellAtIndex:(NSInteger)index;
-- (DCScrollViewNavigationViewCell *)dcscrollView:(DCScrollView *)scrollView navigationViewCellAtIndex:(NSInteger)index;
-
-@end
-
-@protocol DCScrollViewDelegate <NSObject>
-
-@optional
-
-- (CGSize)sizeOfDCScrollViewNavigationViewCell;
-- (void)dcscrollViewDidScroll:(DCScrollView *)scrollView didChangeVisibleCell:(DCScrollViewCell *)cell atIndex:(NSInteger)index;
-
-@end
-
-```
 
 ### Reload
 
@@ -61,10 +48,24 @@ If UIViewController received memory warnings, control to clear the memory that D
 Example
 ----------
 
+- import `DCScrollView.h`
+- implement `DCScrollViewDataSource` and `DCScrollViewDelegate`'s methods
+
 ### UIViewController
+
 
 ```objc
 
+
+#import "DCScrollView.h"
+
+@interface ExampleViewController ()
+
+<DCScrollViewDataSource, DCScrollViewDelegate>
+
+@end
+
+@implementation ExampleViewController
 
 - (void)viewDidLoad
 {
