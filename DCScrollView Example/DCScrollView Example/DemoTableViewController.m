@@ -27,7 +27,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -40,13 +40,19 @@
     NSString *text;
     switch (indexPath.row) {
         case 0:
-            text = @"sample 10 cells";
+            text = @"10 cells";
             break;
+
         case 1:
-            text = @"sample 1 cells";
+            text = @"1 cell";
             break;
+
         case 2:
-            text = @"sample custom cells";
+            text = @"none";
+            break;
+
+        case 3:
+            text = @"custom cells";
             break;
 
         default:
@@ -63,18 +69,18 @@
 {
     UIViewController *viewController;
     switch (indexPath.row) {
-        case 0:
-            viewController = [[DemoViewController alloc] init];
-            [(DemoViewController *)viewController setNumerOfCells:10];
-            break;
-        case 1:
-            viewController = [[DemoViewController alloc] init];
-            [(DemoViewController *)viewController setNumerOfCells:1];
-            break;
-        case 2:
+        case 3:
             viewController = [[CustomCellDemoViewController alloc] init];
             break;
         default:
+            viewController = [[DemoViewController alloc] init];
+            NSInteger numberOfCells = 0;
+            if (indexPath.row == 0) {
+                numberOfCells = 10;
+            } else if (indexPath.row == 1) {
+                numberOfCells = 1;
+            }
+            [(DemoViewController *)viewController setNumerOfCells:numberOfCells];
             break;
     }
 

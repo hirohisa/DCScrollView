@@ -83,8 +83,8 @@
 - (void)_initialize
 {
     // set content size
-    NSInteger length = ([self.dataSource numberOfCellsInDCScrollViewContentView:self] != 1)?3:1;
-    self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * length, CGRectGetHeight(self.frame));
+
+    self.contentSize = CGSizeMake(CGRectGetWidth(self.frame) * [self numberOfContentViewCells], CGRectGetHeight(self.frame));
 
     // enqueue cells
     CGPoint startPoint = CGPointZero;
@@ -103,7 +103,7 @@
     }
 
     // add subviews
-    if ([self.dataSource numberOfCellsInDCScrollViewContentView:self] != 1) {
+    if ([self.dataSource numberOfCellsInDCScrollViewContentView:self] > 1) {
         id previousCell = [self cellAtIndex:self.page-1];
         self.previousCell = previousCell;
         self.previousCell.frame = (CGRect) {
@@ -114,16 +114,18 @@
         startPoint = CGPointMake(CGRectGetMaxX(self.previousCell.frame), 0);
     }
 
-    id currentCell = [self cellAtIndex:self.page];
-    self.currentCell = currentCell;
-    self.currentCell.frame = (CGRect) {
-        .origin = startPoint,
-        .size = self.currentCell.frame.size
-    };
-    [self addSubview:self.currentCell];
+    if ([self.dataSource numberOfCellsInDCScrollViewContentView:self] >= 1) {
+        id currentCell = [self cellAtIndex:self.page];
+        self.currentCell = currentCell;
+        self.currentCell.frame = (CGRect) {
+            .origin = startPoint,
+            .size = self.currentCell.frame.size
+        };
+        [self addSubview:self.currentCell];
+        startPoint = CGPointMake(CGRectGetMaxX(self.currentCell.frame), 0);
+    }
 
-    startPoint = CGPointMake(CGRectGetMaxX(self.currentCell.frame), 0);
-    if ([self.dataSource numberOfCellsInDCScrollViewContentView:self] != 1) {
+    if ([self.dataSource numberOfCellsInDCScrollViewContentView:self] > 1) {
         id nextCell = [self cellAtIndex:self.page+1];
         self.nextCell = nextCell;
         self.nextCell.frame = (CGRect) {
@@ -248,6 +250,22 @@
     }
 }
 
+- (NSUInteger)numberOfContentViewCells
+{
+    switch ([self.dataSource numberOfCellsInDCScrollViewContentView:self]) {
+        case 0:
+            return 0;
+            break;
+
+        case 1:
+            return 1;
+            break;
+
+        default:
+            return 3;
+            break;
+    }
+}
 
 #pragma mark - UIScrollViewDelegate
 

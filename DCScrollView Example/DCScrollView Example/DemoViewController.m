@@ -69,10 +69,7 @@
 
 - (NSInteger)numberOfCellsInDCScrollView:(DCScrollView *)scrollView
 {
-    if (self.numerOfCells) {
-        return self.numerOfCells;
-    }
-    return 1;
+    return self.numerOfCells;
 }
 
 - (DCScrollViewCell *)dcscrollView:(DCScrollView *)scrollView cellAtIndex:(NSInteger)index

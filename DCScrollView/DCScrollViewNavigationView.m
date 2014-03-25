@@ -93,8 +93,7 @@
     }
     self.visibleCells = [@[] mutableCopy];
 
-    NSUInteger length = ([self.dataSource numberOfCellsInDCScrollViewNavigationView:self] > 1)?11:1;
-    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.scrollView.frame) * length, CGRectGetHeight(self.frame));
+    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.scrollView.frame) * [self numberOfNavigationViewCells], CGRectGetHeight(self.frame));
     [self renderCells];
     CGFloat x = CGRectGetWidth(self.scrollView.bounds) * ([self.scrollView centerPage]);
     [self.scrollView setContentOffset:CGPointMake(x, 0) animated:NO];
@@ -127,6 +126,11 @@
         } else {
             [cells addObject:cell];
         }
+    }
+
+    // if numberOfNavigationViewCells is zero then dont render
+    if (![self numberOfNavigationViewCells]) {
+        return;
     }
 
     // add cells to visibled
@@ -167,6 +171,23 @@
 {
     for (DCScrollViewNavigationViewCell *cell in self.visibleCells) {
         cell.highlighted = (cell.index == self.page);
+    }
+}
+
+- (NSUInteger)numberOfNavigationViewCells
+{
+    switch ([self.dataSource numberOfCellsInDCScrollViewNavigationView:self]) {
+        case 0:
+            return 0;
+            break;
+
+        case 1:
+            return 1;
+            break;
+
+        default:
+            return 11;
+            break;
     }
 }
 
