@@ -9,8 +9,6 @@
 #import "DCScrollView+Logic.h"
 
 
-@interface DCScrollViewNavigationViewInnerScrollView : UIScrollView
-@end
 
 @implementation DCScrollViewNavigationViewInnerScrollView
 
@@ -23,18 +21,28 @@
     }
 }
 
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    if (self.delegate) {
+        UIView *superView = (UIView *)self.delegate;
+        self.center = (CGPoint) {
+            .x = CGRectGetWidth(superView.bounds)/2,
+            .y = CGRectGetHeight(superView.bounds)/2
+        };
+    }
+}
+
 @end
 
 
 @interface DCScrollViewNavigationView () <UIScrollViewDelegate>
 
-@property (nonatomic, readonly) DCScrollViewNavigationViewInnerScrollView *scrollView;
-
 @end
 
 @implementation DCScrollViewNavigationView
 
-- (id)initWithFrame:(CGRect)frame frameAtScrollView:(CGRect)frameAtScrollView
+- (id)initWithFrame:(CGRect)frame
 
 {
     self = [super initWithFrame:frame];
@@ -51,19 +59,8 @@
         self.scrollView.showsVerticalScrollIndicator   = NO;
         self.scrollView.scrollsToTop = NO;
         [self addSubview:self.scrollView];
-
-        [self setFrameAtScrollView:frameAtScrollView];
     }
     return self;
-}
-
-- (void)setFrameAtScrollView:(CGRect)frame
-{
-    self.scrollView.frame = frame;
-    self.scrollView.center = (CGPoint) {
-        .x = CGRectGetWidth(self.bounds)/2,
-        .y = CGRectGetHeight(self.bounds)/2
-    };
 }
 
 #pragma mark - generate

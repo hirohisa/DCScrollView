@@ -176,6 +176,8 @@ DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
         _reusableCells = [@{} mutableCopy];
         self.clipsToBounds = YES;
         self.backgroundColor = [UIColor whiteColor];
+        _navigationView = [[DCScrollViewNavigationView alloc] initWithFrame:CGRectZero];
+        _contentView = [[DCScrollViewContentView alloc] initWithFrame:CGRectZero];
     }
     return self;
 }
@@ -186,41 +188,42 @@ DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
 {
     // navigation
     CGRect frame;
-    if (!self.navigationView) {
-        frame = (CGRect) {
-            .origin.x = 0,
-            .origin.y = 0,
-            .size.width  = CGRectGetWidth(self.bounds),
-            .size.height = [self sizeOfCellInDCScrollViewNavigationView].height
-        };
-        CGRect frameAtScrollView = (CGRect) {
-            .origin.x = 0,
-            .origin.y = 0,
-            .size     = [self sizeOfCellInDCScrollViewNavigationView]
-        };
-        _navigationView = [[DCScrollViewNavigationView alloc] initWithFrame:frame frameAtScrollView:frameAtScrollView];
-        self.navigationView.focusedCenter = self.focusedCenter;
-        self.navigationView.delegate = self;
-        self.navigationView.dataSource = self;
-        [self addSubview:self.navigationView];
-    }
+    frame = (CGRect) {
+        .origin.x = 0,
+        .origin.y = 0,
+        .size.width  = CGRectGetWidth(self.bounds),
+        .size.height = [self sizeOfCellInDCScrollViewNavigationView].height
+    };
+    self.navigationView.frame = frame;
+
+    frame = (CGRect) {
+        .origin.x = 0,
+        .origin.y = 0,
+        .size     = [self sizeOfCellInDCScrollViewNavigationView]
+    };
+    self.navigationView.scrollView.frame = frame;
+
+    self.navigationView.focusedCenter = self.focusedCenter;
+    self.navigationView.delegate = self;
+    self.navigationView.dataSource = self;
+    [self addSubview:self.navigationView];
 
     // content
-    if (!self.contentView) {
-        frame = (CGRect) {
-            .origin.x = 0,
-            .origin.y = CGRectGetMaxY(self.navigationView.frame),
-            .size.width = CGRectGetWidth(self.frame),
-            .size.height = CGRectGetHeight(self.frame) - CGRectGetHeight(self.navigationView.frame)
-        };
-        _contentView = [[DCScrollViewContentView alloc]initWithFrame:frame];
-        self.contentView.delegate = self;
-        self.contentView.dataSource = self;
-        self.contentView.pagingEnabled = YES;
-        self.contentView.showsHorizontalScrollIndicator = NO;
-        self.contentView.showsVerticalScrollIndicator   = NO;
-        [self addSubview:self.contentView];
-    }
+    frame = (CGRect) {
+        .origin.x = 0,
+        .origin.y = CGRectGetMaxY(self.navigationView.frame),
+        .size.width = CGRectGetWidth(self.frame),
+        .size.height = CGRectGetHeight(self.frame) - CGRectGetHeight(self.navigationView.frame)
+    };
+    self.contentView.frame = frame;
+
+    self.contentView.delegate = self;
+    self.contentView.dataSource = self;
+    self.contentView.pagingEnabled = YES;
+    self.contentView.showsHorizontalScrollIndicator = NO;
+    self.contentView.showsVerticalScrollIndicator   = NO;
+    [self addSubview:self.contentView];
+
     [self reloadData];
 }
 

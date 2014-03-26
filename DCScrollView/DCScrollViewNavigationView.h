@@ -9,6 +9,9 @@
 
 @class DCScrollViewNavigationView, DCScrollViewNavigationViewCell;
 
+@interface DCScrollViewNavigationViewInnerScrollView : UIScrollView
+@end
+
 @protocol DCScrollViewNavigationViewDelegate <NSObject>
 
 - (void)dcscrollViewNavigationViewDidEndDecelerating:(DCScrollViewNavigationView *)navigationView;
@@ -25,14 +28,14 @@
 
 @interface DCScrollViewNavigationView : UIView <UIScrollViewDelegate>
 
+@property (nonatomic, readonly) DCScrollViewNavigationViewInnerScrollView *scrollView;
+
 @property (nonatomic, assign) id<DCScrollViewNavigationViewDelegate> delegate;
 @property (nonatomic, assign) id<DCScrollViewNavigationViewDataSource> dataSource;
 
 @property (nonatomic, strong) NSMutableArray *visibleCells;
 @property (nonatomic, readonly) NSInteger page;
 @property (nonatomic) BOOL focusedCenter;
-
-- (id)initWithFrame:(CGRect)frame frameAtScrollView:(CGRect)frameAtScrollView;
 
 - (void)reloadData;
 - (void)scrollToPage:(NSInteger)page animated:(BOOL)animated;
