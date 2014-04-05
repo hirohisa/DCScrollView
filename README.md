@@ -99,10 +99,7 @@ Example
 ```
 
 
-Features
-----------
-
-#### Deprecate
+### will deprecate
 
 ```objc
 - (void)setFont:(UIFont *)font textColor:(UIColor *)textColor highlightedTextColor:(UIColor *)highlightedTextColor
