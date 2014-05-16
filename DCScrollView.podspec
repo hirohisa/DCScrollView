@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "DCScrollView"
-  s.version      = "1.1.0"
+  s.version      = "1.1.1"
   s.summary      = "DCScrollView is an extension of UIScrollView that scrolling through the content, the title scrolls with a delay like Etsy app for iOS."
   s.homepage     = "https://github.com/hirohisa/DCScrollView"
   s.license      = {
