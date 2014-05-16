@@ -283,11 +283,11 @@ DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
     [self clearData];
     [self.navigationView reloadData];
     [self.contentView reloadData];
+    self.touchedContentView = NO;
 }
 
 - (void)clearData
 {
-    self.touchedContentView = NO;
     _reusableCells = [@{} mutableCopy];
 }
 
