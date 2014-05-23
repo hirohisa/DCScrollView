@@ -17,6 +17,9 @@
 - (void)dcscrollViewNavigationViewDidEndDecelerating:(DCScrollViewNavigationView *)navigationView;
 - (void)dcscrollViewNavigationViewDidEndScrollingAnimation:(DCScrollViewNavigationView *)navigationView;
 
+@optional
+- (void)dcscrollViewNavigationViewDidScroll:(DCScrollViewNavigationView *)navigationView;
+
 @end
 
 @protocol DCScrollViewNavigationViewDataSource <NSObject>

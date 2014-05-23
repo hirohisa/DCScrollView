@@ -214,6 +214,9 @@
             .y = 0
         };
     }
+    if ([self.delegate respondsToSelector:@selector(dcscrollViewNavigationViewDidScroll:)]) {
+        [self.delegate dcscrollViewNavigationViewDidScroll:self];
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
