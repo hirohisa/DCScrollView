@@ -19,6 +19,7 @@
 
 @optional
 - (void)dcscrollViewNavigationViewDidScroll:(DCScrollViewNavigationView *)navigationView;
+- (void)dcscrollViewNavigationViewWillBeginDragging:(DCScrollViewNavigationView *)navigationView;
 
 @end
 
