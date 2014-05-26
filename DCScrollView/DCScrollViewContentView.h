@@ -22,6 +22,10 @@
 - (void)dcscrollViewContentView:(DCScrollViewContentView *)contentView didChangeVisibleCellAtIndex:(NSInteger)index;
 - (void)dcscrollViewContentViewDidScroll:(DCScrollViewContentView *)contentView;
 
+@optional
+- (void)dcscrollViewContentViewDidEndDecelerating:(DCScrollViewContentView *)contentView;
+- (void)dcscrollViewContentViewDidEndScrollingAnimation:(DCScrollViewContentView *)contentView;
+
 @end
 
 @interface DCScrollViewContentView : UIScrollView
