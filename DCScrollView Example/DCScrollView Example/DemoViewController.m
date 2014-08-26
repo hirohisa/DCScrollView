@@ -53,11 +53,24 @@
     [self.scrollView setFont:[UIFont systemFontOfSize:15.] textColor:[UIColor grayColor] highlightedTextColor:[UIColor redColor]];
     [self.view addSubview:self.scrollView];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithTitle:@"Reload"
-                                              style:UIBarButtonItemStylePlain
-                                              target:self
-                                              action:@selector(reloadData)];
+    UIBarButtonItem *buttonItem1 = [[UIBarButtonItem alloc]
+                                    initWithTitle:@"Reload"
+                                    style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(reloadData)];
+
+    UIBarButtonItem *buttonItem2 = [[UIBarButtonItem alloc]
+                                    initWithTitle:@"moveTo0"
+                                    style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(moveToZero)];
+
+    self.navigationItem.rightBarButtonItems = @[buttonItem1, buttonItem2];
+}
+
+- (void)moveToZero
+{
+    self.scrollView.page = 0;
 }
 
 - (void)reloadData

@@ -51,6 +51,7 @@
 @interface DCScrollView : UIView
 
 @property (nonatomic) BOOL focusedCenter;
+@property (nonatomic) NSUInteger page;
 
 @property (nonatomic, assign) id <DCScrollViewDataSource> dataSource;
 @property (nonatomic, assign) id <DCScrollViewDelegate> delegate;
