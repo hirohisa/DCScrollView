@@ -10,7 +10,7 @@
 
 @interface DCScrollViewContentView () <UIScrollViewDelegate> {
     @package
-    id _delegate;
+    __unsafe_unretained id _delegate;
 }
 
 @end
