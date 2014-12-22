@@ -7,141 +7,131 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A15BBB801A487D4D005D9255 /* DCScrollView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A15BBB741A487D4D005D9255 /* DCScrollView.framework */; };
-		A15BBB871A487D4D005D9255 /* DCScrollViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBB861A487D4D005D9255 /* DCScrollViewTests.m */; };
-		A15BBB991A487DAD005D9255 /* DCScrollView+Logic.h in Headers */ = {isa = PBXBuildFile; fileRef = A15BBB911A487DAD005D9255 /* DCScrollView+Logic.h */; };
-		A15BBB9A1A487DAD005D9255 /* DCScrollView+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBB921A487DAD005D9255 /* DCScrollView+Logic.m */; };
-		A15BBB9B1A487DAD005D9255 /* DCScrollView+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBB921A487DAD005D9255 /* DCScrollView+Logic.m */; };
-		A15BBB9C1A487DAD005D9255 /* DCScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = A15BBB931A487DAD005D9255 /* DCScrollView.h */; };
-		A15BBB9D1A487DAD005D9255 /* DCScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBB941A487DAD005D9255 /* DCScrollView.m */; };
-		A15BBB9E1A487DAD005D9255 /* DCScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBB941A487DAD005D9255 /* DCScrollView.m */; };
-		A15BBB9F1A487DAD005D9255 /* DCScrollViewContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = A15BBB951A487DAD005D9255 /* DCScrollViewContentView.h */; };
-		A15BBBA01A487DAD005D9255 /* DCScrollViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBB961A487DAD005D9255 /* DCScrollViewContentView.m */; };
-		A15BBBA11A487DAD005D9255 /* DCScrollViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBB961A487DAD005D9255 /* DCScrollViewContentView.m */; };
-		A15BBBA21A487DAD005D9255 /* DCScrollViewNavigationView.h in Headers */ = {isa = PBXBuildFile; fileRef = A15BBB971A487DAD005D9255 /* DCScrollViewNavigationView.h */; };
-		A15BBBA31A487DAD005D9255 /* DCScrollViewNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBB981A487DAD005D9255 /* DCScrollViewNavigationView.m */; };
-		A15BBBA41A487DAD005D9255 /* DCScrollViewNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBB981A487DAD005D9255 /* DCScrollViewNavigationView.m */; };
+		A15BBBC71A48842D005D9255 /* libDCScrollView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A15BBBBB1A48842D005D9255 /* libDCScrollView.a */; };
+		A15BBBDE1A488480005D9255 /* DCScrollView+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBD71A488480005D9255 /* DCScrollView+Logic.m */; };
+		A15BBBDF1A488480005D9255 /* DCScrollView+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBD71A488480005D9255 /* DCScrollView+Logic.m */; };
+		A15BBBE01A488480005D9255 /* DCScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBD91A488480005D9255 /* DCScrollView.m */; };
+		A15BBBE11A488480005D9255 /* DCScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBD91A488480005D9255 /* DCScrollView.m */; };
+		A15BBBE21A488480005D9255 /* DCScrollViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBDB1A488480005D9255 /* DCScrollViewContentView.m */; };
+		A15BBBE31A488480005D9255 /* DCScrollViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBDB1A488480005D9255 /* DCScrollViewContentView.m */; };
+		A15BBBE41A488480005D9255 /* DCScrollViewNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBDD1A488480005D9255 /* DCScrollViewNavigationView.m */; };
+		A15BBBE51A488480005D9255 /* DCScrollViewNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBDD1A488480005D9255 /* DCScrollViewNavigationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A15BBB811A487D4D005D9255 /* PBXContainerItemProxy */ = {
+		A15BBBC81A48842D005D9255 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A15BBB6B1A487D4D005D9255 /* Project object */;
+			containerPortal = A15BBBB31A48842D005D9255 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A15BBB731A487D4D005D9255;
+			remoteGlobalIDString = A15BBBBA1A48842D005D9255;
 			remoteInfo = DCScrollView;
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A15BBBB91A48842D005D9255 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		A15BBB741A487D4D005D9255 /* DCScrollView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DCScrollView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A15BBB7F1A487D4D005D9255 /* DCScrollViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DCScrollViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A15BBB851A487D4D005D9255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A15BBB861A487D4D005D9255 /* DCScrollViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewTests.m; sourceTree = "<group>"; };
-		A15BBB911A487DAD005D9255 /* DCScrollView+Logic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCScrollView+Logic.h"; sourceTree = "<group>"; };
-		A15BBB921A487DAD005D9255 /* DCScrollView+Logic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCScrollView+Logic.m"; sourceTree = "<group>"; };
-		A15BBB931A487DAD005D9255 /* DCScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollView.h; sourceTree = "<group>"; };
-		A15BBB941A487DAD005D9255 /* DCScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollView.m; sourceTree = "<group>"; };
-		A15BBB951A487DAD005D9255 /* DCScrollViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollViewContentView.h; sourceTree = "<group>"; };
-		A15BBB961A487DAD005D9255 /* DCScrollViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewContentView.m; sourceTree = "<group>"; };
-		A15BBB971A487DAD005D9255 /* DCScrollViewNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollViewNavigationView.h; sourceTree = "<group>"; };
-		A15BBB981A487DAD005D9255 /* DCScrollViewNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewNavigationView.m; sourceTree = "<group>"; };
+		A15BBBBB1A48842D005D9255 /* libDCScrollView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDCScrollView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A15BBBC61A48842D005D9255 /* DCScrollViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DCScrollViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A15BBBCC1A48842D005D9255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A15BBBD61A488480005D9255 /* DCScrollView+Logic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCScrollView+Logic.h"; sourceTree = "<group>"; };
+		A15BBBD71A488480005D9255 /* DCScrollView+Logic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCScrollView+Logic.m"; sourceTree = "<group>"; };
+		A15BBBD81A488480005D9255 /* DCScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollView.h; sourceTree = "<group>"; };
+		A15BBBD91A488480005D9255 /* DCScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollView.m; sourceTree = "<group>"; };
+		A15BBBDA1A488480005D9255 /* DCScrollViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollViewContentView.h; sourceTree = "<group>"; };
+		A15BBBDB1A488480005D9255 /* DCScrollViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewContentView.m; sourceTree = "<group>"; };
+		A15BBBDC1A488480005D9255 /* DCScrollViewNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollViewNavigationView.h; sourceTree = "<group>"; };
+		A15BBBDD1A488480005D9255 /* DCScrollViewNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewNavigationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A15BBB701A487D4D005D9255 /* Frameworks */ = {
+		A15BBBB81A48842D005D9255 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A15BBB7C1A487D4D005D9255 /* Frameworks */ = {
+		A15BBBC31A48842D005D9255 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A15BBB801A487D4D005D9255 /* DCScrollView.framework in Frameworks */,
+				A15BBBC71A48842D005D9255 /* libDCScrollView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A15BBB6A1A487D4D005D9255 = {
+		A15BBBB21A48842D005D9255 = {
 			isa = PBXGroup;
 			children = (
-				A15BBB901A487DAD005D9255 /* DCScrollView */,
-				A15BBB831A487D4D005D9255 /* DCScrollViewTests */,
-				A15BBB751A487D4D005D9255 /* Products */,
+				A15BBBD51A488480005D9255 /* DCScrollView */,
+				A15BBBCA1A48842D005D9255 /* DCScrollViewTests */,
+				A15BBBBC1A48842D005D9255 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		A15BBB751A487D4D005D9255 /* Products */ = {
+		A15BBBBC1A48842D005D9255 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A15BBB741A487D4D005D9255 /* DCScrollView.framework */,
-				A15BBB7F1A487D4D005D9255 /* DCScrollViewTests.xctest */,
+				A15BBBBB1A48842D005D9255 /* libDCScrollView.a */,
+				A15BBBC61A48842D005D9255 /* DCScrollViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A15BBB831A487D4D005D9255 /* DCScrollViewTests */ = {
+		A15BBBCA1A48842D005D9255 /* DCScrollViewTests */ = {
 			isa = PBXGroup;
 			children = (
-				A15BBB861A487D4D005D9255 /* DCScrollViewTests.m */,
-				A15BBB841A487D4D005D9255 /* Supporting Files */,
+				A15BBBCB1A48842D005D9255 /* Supporting Files */,
 			);
 			path = DCScrollViewTests;
 			sourceTree = "<group>";
 		};
-		A15BBB841A487D4D005D9255 /* Supporting Files */ = {
+		A15BBBCB1A48842D005D9255 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A15BBB851A487D4D005D9255 /* Info.plist */,
+				A15BBBCC1A48842D005D9255 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A15BBB901A487DAD005D9255 /* DCScrollView */ = {
+		A15BBBD51A488480005D9255 /* DCScrollView */ = {
 			isa = PBXGroup;
 			children = (
-				A15BBB911A487DAD005D9255 /* DCScrollView+Logic.h */,
-				A15BBB921A487DAD005D9255 /* DCScrollView+Logic.m */,
-				A15BBB931A487DAD005D9255 /* DCScrollView.h */,
-				A15BBB941A487DAD005D9255 /* DCScrollView.m */,
-				A15BBB951A487DAD005D9255 /* DCScrollViewContentView.h */,
-				A15BBB961A487DAD005D9255 /* DCScrollViewContentView.m */,
-				A15BBB971A487DAD005D9255 /* DCScrollViewNavigationView.h */,
-				A15BBB981A487DAD005D9255 /* DCScrollViewNavigationView.m */,
+				A15BBBD61A488480005D9255 /* DCScrollView+Logic.h */,
+				A15BBBD71A488480005D9255 /* DCScrollView+Logic.m */,
+				A15BBBD81A488480005D9255 /* DCScrollView.h */,
+				A15BBBD91A488480005D9255 /* DCScrollView.m */,
+				A15BBBDA1A488480005D9255 /* DCScrollViewContentView.h */,
+				A15BBBDB1A488480005D9255 /* DCScrollViewContentView.m */,
+				A15BBBDC1A488480005D9255 /* DCScrollViewNavigationView.h */,
+				A15BBBDD1A488480005D9255 /* DCScrollViewNavigationView.m */,
 			);
 			path = DCScrollView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		A15BBB711A487D4D005D9255 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A15BBB9C1A487DAD005D9255 /* DCScrollView.h in Headers */,
-				A15BBB991A487DAD005D9255 /* DCScrollView+Logic.h in Headers */,
-				A15BBB9F1A487DAD005D9255 /* DCScrollViewContentView.h in Headers */,
-				A15BBBA21A487DAD005D9255 /* DCScrollViewNavigationView.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		A15BBB731A487D4D005D9255 /* DCScrollView */ = {
+		A15BBBBA1A48842D005D9255 /* DCScrollView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A15BBB8A1A487D4D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollView" */;
+			buildConfigurationList = A15BBBCF1A48842D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollView" */;
 			buildPhases = (
-				A15BBB6F1A487D4D005D9255 /* Sources */,
-				A15BBB701A487D4D005D9255 /* Frameworks */,
-				A15BBB711A487D4D005D9255 /* Headers */,
-				A15BBB721A487D4D005D9255 /* Resources */,
+				A15BBBB71A48842D005D9255 /* Sources */,
+				A15BBBB81A48842D005D9255 /* Frameworks */,
+				A15BBBB91A48842D005D9255 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -149,71 +139,64 @@
 			);
 			name = DCScrollView;
 			productName = DCScrollView;
-			productReference = A15BBB741A487D4D005D9255 /* DCScrollView.framework */;
-			productType = "com.apple.product-type.framework";
+			productReference = A15BBBBB1A48842D005D9255 /* libDCScrollView.a */;
+			productType = "com.apple.product-type.library.static";
 		};
-		A15BBB7E1A487D4D005D9255 /* DCScrollViewTests */ = {
+		A15BBBC51A48842D005D9255 /* DCScrollViewTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A15BBB8D1A487D4D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollViewTests" */;
+			buildConfigurationList = A15BBBD21A48842D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollViewTests" */;
 			buildPhases = (
-				A15BBB7B1A487D4D005D9255 /* Sources */,
-				A15BBB7C1A487D4D005D9255 /* Frameworks */,
-				A15BBB7D1A487D4D005D9255 /* Resources */,
+				A15BBBC21A48842D005D9255 /* Sources */,
+				A15BBBC31A48842D005D9255 /* Frameworks */,
+				A15BBBC41A48842D005D9255 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A15BBB821A487D4D005D9255 /* PBXTargetDependency */,
+				A15BBBC91A48842D005D9255 /* PBXTargetDependency */,
 			);
 			name = DCScrollViewTests;
 			productName = DCScrollViewTests;
-			productReference = A15BBB7F1A487D4D005D9255 /* DCScrollViewTests.xctest */;
+			productReference = A15BBBC61A48842D005D9255 /* DCScrollViewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A15BBB6B1A487D4D005D9255 /* Project object */ = {
+		A15BBBB31A48842D005D9255 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Hirohisa Kawasaki";
 				TargetAttributes = {
-					A15BBB731A487D4D005D9255 = {
+					A15BBBBA1A48842D005D9255 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
-					A15BBB7E1A487D4D005D9255 = {
+					A15BBBC51A48842D005D9255 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
 			};
-			buildConfigurationList = A15BBB6E1A487D4D005D9255 /* Build configuration list for PBXProject "DCScrollView" */;
+			buildConfigurationList = A15BBBB61A48842D005D9255 /* Build configuration list for PBXProject "DCScrollView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = A15BBB6A1A487D4D005D9255;
-			productRefGroup = A15BBB751A487D4D005D9255 /* Products */;
+			mainGroup = A15BBBB21A48842D005D9255;
+			productRefGroup = A15BBBBC1A48842D005D9255 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A15BBB731A487D4D005D9255 /* DCScrollView */,
-				A15BBB7E1A487D4D005D9255 /* DCScrollViewTests */,
+				A15BBBBA1A48842D005D9255 /* DCScrollView */,
+				A15BBBC51A48842D005D9255 /* DCScrollViewTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A15BBB721A487D4D005D9255 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A15BBB7D1A487D4D005D9255 /* Resources */ = {
+		A15BBBC41A48842D005D9255 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -223,41 +206,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A15BBB6F1A487D4D005D9255 /* Sources */ = {
+		A15BBBB71A48842D005D9255 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A15BBB9D1A487DAD005D9255 /* DCScrollView.m in Sources */,
-				A15BBBA01A487DAD005D9255 /* DCScrollViewContentView.m in Sources */,
-				A15BBB9A1A487DAD005D9255 /* DCScrollView+Logic.m in Sources */,
-				A15BBBA31A487DAD005D9255 /* DCScrollViewNavigationView.m in Sources */,
+				A15BBBE01A488480005D9255 /* DCScrollView.m in Sources */,
+				A15BBBDE1A488480005D9255 /* DCScrollView+Logic.m in Sources */,
+				A15BBBE41A488480005D9255 /* DCScrollViewNavigationView.m in Sources */,
+				A15BBBE21A488480005D9255 /* DCScrollViewContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A15BBB7B1A487D4D005D9255 /* Sources */ = {
+		A15BBBC21A48842D005D9255 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A15BBB871A487D4D005D9255 /* DCScrollViewTests.m in Sources */,
-				A15BBB9E1A487DAD005D9255 /* DCScrollView.m in Sources */,
-				A15BBB9B1A487DAD005D9255 /* DCScrollView+Logic.m in Sources */,
-				A15BBBA41A487DAD005D9255 /* DCScrollViewNavigationView.m in Sources */,
-				A15BBBA11A487DAD005D9255 /* DCScrollViewContentView.m in Sources */,
+				A15BBBE11A488480005D9255 /* DCScrollView.m in Sources */,
+				A15BBBE31A488480005D9255 /* DCScrollViewContentView.m in Sources */,
+				A15BBBDF1A488480005D9255 /* DCScrollView+Logic.m in Sources */,
+				A15BBBE51A488480005D9255 /* DCScrollViewNavigationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A15BBB821A487D4D005D9255 /* PBXTargetDependency */ = {
+		A15BBBC91A48842D005D9255 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A15BBB731A487D4D005D9255 /* DCScrollView */;
-			targetProxy = A15BBB811A487D4D005D9255 /* PBXContainerItemProxy */;
+			target = A15BBBBA1A48842D005D9255 /* DCScrollView */;
+			targetProxy = A15BBBC81A48842D005D9255 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		A15BBB881A487D4D005D9255 /* Debug */ = {
+		A15BBBCD1A48842D005D9255 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -274,9 +256,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -296,13 +276,10 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		A15BBB891A487D4D005D9255 /* Release */ = {
+		A15BBBCE1A48842D005D9255 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -319,9 +296,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -334,42 +309,29 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		A15BBB8B1A487D4D005D9255 /* Debug */ = {
+		A15BBBD01A48842D005D9255 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		A15BBB8C1A487D4D005D9255 /* Release */ = {
+		A15BBBD11A48842D005D9255 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		A15BBB8E1A487D4D005D9255 /* Debug */ = {
+		A15BBBD31A48842D005D9255 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -386,7 +348,7 @@
 			};
 			name = Debug;
 		};
-		A15BBB8F1A487D4D005D9255 /* Release */ = {
+		A15BBBD41A48842D005D9255 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -402,32 +364,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A15BBB6E1A487D4D005D9255 /* Build configuration list for PBXProject "DCScrollView" */ = {
+		A15BBBB61A48842D005D9255 /* Build configuration list for PBXProject "DCScrollView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A15BBB881A487D4D005D9255 /* Debug */,
-				A15BBB891A487D4D005D9255 /* Release */,
+				A15BBBCD1A48842D005D9255 /* Debug */,
+				A15BBBCE1A48842D005D9255 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A15BBB8A1A487D4D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollView" */ = {
+		A15BBBCF1A48842D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A15BBB8B1A487D4D005D9255 /* Debug */,
-				A15BBB8C1A487D4D005D9255 /* Release */,
+				A15BBBD01A48842D005D9255 /* Debug */,
+				A15BBBD11A48842D005D9255 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		A15BBB8D1A487D4D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollViewTests" */ = {
+		A15BBBD21A48842D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollViewTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A15BBB8E1A487D4D005D9255 /* Debug */,
-				A15BBB8F1A487D4D005D9255 /* Release */,
+				A15BBBD31A48842D005D9255 /* Debug */,
+				A15BBBD41A48842D005D9255 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A15BBB6B1A487D4D005D9255 /* Project object */;
+	rootObject = A15BBBB31A48842D005D9255 /* Project object */;
 }

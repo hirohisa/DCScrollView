@@ -1,4 +1,4 @@
-PROJECT = DCScrollViewTests/DCScrollView.xcodeproj
+PROJECT = DCScrollView.xcodeproj
 
 clean:
 	xcodebuild \
