@@ -31,23 +31,23 @@
     NSInteger result;
     result = [@(0) relativedIntegerValueWithLength:2];
     XCTAssertTrue(0 == result,
-                  @"relativedIntegerValueForIndex:%d", result);
+                  @"relativedIntegerValueForIndex:%ld", (long)result);
 
     result = [@(-1) relativedIntegerValueWithLength:2];
     XCTAssertTrue(1 == result,
-                  @"relativedIntegerValueForIndex:%d", result);
+                  @"relativedIntegerValueForIndex:%ld", (long)result);
 
     result = [@(-1) relativedIntegerValueWithLength:3];
     XCTAssertTrue(2 == result,
-                  @"relativedIntegerValueForIndex:%d", result);
+                  @"relativedIntegerValueForIndex:%ld", (long)result);
 
     result = [@(0) relativedIntegerValueWithLength:1];
     XCTAssertTrue(0 == result,
-                  @"relativedIntegerValueForIndex:%d", result);
+                  @"relativedIntegerValueForIndex:%ld", (long)result);
 
     result = [@(-5) relativedIntegerValueWithLength:3];
     XCTAssertTrue(1 == result,
-                  @"relativedIntegerValueForIndex:%d", result);
+                  @"relativedIntegerValueForIndex:%ld", (long)result);
 }
 
 - (void)testCenterPageAndReservingPage
@@ -66,23 +66,23 @@
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:frame];
     scrollView.contentSize = contentSize;
     XCTAssertTrue(5 == [scrollView centerPage],
-                  @"centerPage:%d", [scrollView centerPage]);
+                  @"centerPage:%ld", (long)[scrollView centerPage]);
 
     scrollView.contentOffset = CGPointMake(0, 0);
     XCTAssertTrue(0 == [scrollView reservingPage],
-                  @"willedPage:%d", [scrollView reservingPage]);
+                  @"willedPage:%ld", (long)[scrollView reservingPage]);
 
     scrollView.contentOffset = CGPointMake(40, 0);
     XCTAssertTrue(0 == [scrollView reservingPage],
-                  @"willedPage:%d", [scrollView reservingPage]);
+                  @"willedPage:%ld", (long)[scrollView reservingPage]);
 
     scrollView.contentOffset = CGPointMake(60, 0);
     XCTAssertTrue(1 == [scrollView reservingPage],
-                  @"willedPage:%d", [scrollView reservingPage]);
+                  @"willedPage:%ld", (long)[scrollView reservingPage]);
 
     scrollView.contentOffset = CGPointMake(110, 0);
     XCTAssertTrue(1 == [scrollView reservingPage],
-                  @"willedPage:%d", [scrollView reservingPage]);
+                  @"willedPage:%ld", (long)[scrollView reservingPage]);
 }
 
 @end
