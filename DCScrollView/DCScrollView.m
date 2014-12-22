@@ -291,6 +291,18 @@ DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
     _reusableCells = [@{} mutableCopy];
 }
 
+- (NSUInteger)page
+{
+    return self.navigationView.page;
+}
+
+- (void)setPage:(NSUInteger)page
+{
+    self.contentView.page = page;
+    [self.navigationView scrollToPage:page animated:NO];
+    [self reloadData];
+}
+
 - (void)setFont:(UIFont *)font textColor:(UIColor *)textColor highlightedTextColor:(UIColor *)highlightedTextColor
 {
     self.font = font;

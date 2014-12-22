@@ -3,7 +3,7 @@ DCScrollView [![Build Status](https://travis-ci.org/hirohisa/DCScrollView.png?br
 
 DCScrollView is an extension of UIScrollView that scrolling through the content, the title scrolls with a delay like Etsy app for iOS.
 
-![screenshot](https://raw.github.com/hirohisa/DCScrollView/master/DCScrollView Example/screenshot1.png)
+![sample](https://raw.github.com/hirohisa/DCScrollView/master/DCScrollView Example/sample.gif)
 
 
 Installation

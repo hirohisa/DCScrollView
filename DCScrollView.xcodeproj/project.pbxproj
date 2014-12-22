@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A15BBBC71A48842D005D9255 /* libDCScrollView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A15BBBBB1A48842D005D9255 /* libDCScrollView.a */; };
+		A15BBBDE1A488480005D9255 /* DCScrollView+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBD71A488480005D9255 /* DCScrollView+Logic.m */; };
+		A15BBBDF1A488480005D9255 /* DCScrollView+Logic.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBD71A488480005D9255 /* DCScrollView+Logic.m */; };
+		A15BBBE01A488480005D9255 /* DCScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBD91A488480005D9255 /* DCScrollView.m */; };
+		A15BBBE11A488480005D9255 /* DCScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBD91A488480005D9255 /* DCScrollView.m */; };
+		A15BBBE21A488480005D9255 /* DCScrollViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBDB1A488480005D9255 /* DCScrollViewContentView.m */; };
+		A15BBBE31A488480005D9255 /* DCScrollViewContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBDB1A488480005D9255 /* DCScrollViewContentView.m */; };
+		A15BBBE41A488480005D9255 /* DCScrollViewNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBDD1A488480005D9255 /* DCScrollViewNavigationView.m */; };
+		A15BBBE51A488480005D9255 /* DCScrollViewNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A15BBBDD1A488480005D9255 /* DCScrollViewNavigationView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A15BBBC81A48842D005D9255 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A15BBBB31A48842D005D9255 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A15BBBBA1A48842D005D9255;
+			remoteInfo = DCScrollView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A15BBBB91A48842D005D9255 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A15BBBBB1A48842D005D9255 /* libDCScrollView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDCScrollView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A15BBBC61A48842D005D9255 /* DCScrollViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DCScrollViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A15BBBCC1A48842D005D9255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A15BBBD61A488480005D9255 /* DCScrollView+Logic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCScrollView+Logic.h"; sourceTree = "<group>"; };
+		A15BBBD71A488480005D9255 /* DCScrollView+Logic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCScrollView+Logic.m"; sourceTree = "<group>"; };
+		A15BBBD81A488480005D9255 /* DCScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollView.h; sourceTree = "<group>"; };
+		A15BBBD91A488480005D9255 /* DCScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollView.m; sourceTree = "<group>"; };
+		A15BBBDA1A488480005D9255 /* DCScrollViewContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollViewContentView.h; sourceTree = "<group>"; };
+		A15BBBDB1A488480005D9255 /* DCScrollViewContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewContentView.m; sourceTree = "<group>"; };
+		A15BBBDC1A488480005D9255 /* DCScrollViewNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCScrollViewNavigationView.h; sourceTree = "<group>"; };
+		A15BBBDD1A488480005D9255 /* DCScrollViewNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCScrollViewNavigationView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A15BBBB81A48842D005D9255 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A15BBBC31A48842D005D9255 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A15BBBC71A48842D005D9255 /* libDCScrollView.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A15BBBB21A48842D005D9255 = {
+			isa = PBXGroup;
+			children = (
+				A15BBBD51A488480005D9255 /* DCScrollView */,
+				A15BBBCA1A48842D005D9255 /* DCScrollViewTests */,
+				A15BBBBC1A48842D005D9255 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A15BBBBC1A48842D005D9255 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A15BBBBB1A48842D005D9255 /* libDCScrollView.a */,
+				A15BBBC61A48842D005D9255 /* DCScrollViewTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A15BBBCA1A48842D005D9255 /* DCScrollViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				A15BBBCB1A48842D005D9255 /* Supporting Files */,
+			);
+			path = DCScrollViewTests;
+			sourceTree = "<group>";
+		};
+		A15BBBCB1A48842D005D9255 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A15BBBCC1A48842D005D9255 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A15BBBD51A488480005D9255 /* DCScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				A15BBBD61A488480005D9255 /* DCScrollView+Logic.h */,
+				A15BBBD71A488480005D9255 /* DCScrollView+Logic.m */,
+				A15BBBD81A488480005D9255 /* DCScrollView.h */,
+				A15BBBD91A488480005D9255 /* DCScrollView.m */,
+				A15BBBDA1A488480005D9255 /* DCScrollViewContentView.h */,
+				A15BBBDB1A488480005D9255 /* DCScrollViewContentView.m */,
+				A15BBBDC1A488480005D9255 /* DCScrollViewNavigationView.h */,
+				A15BBBDD1A488480005D9255 /* DCScrollViewNavigationView.m */,
+			);
+			path = DCScrollView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A15BBBBA1A48842D005D9255 /* DCScrollView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A15BBBCF1A48842D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollView" */;
+			buildPhases = (
+				A15BBBB71A48842D005D9255 /* Sources */,
+				A15BBBB81A48842D005D9255 /* Frameworks */,
+				A15BBBB91A48842D005D9255 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DCScrollView;
+			productName = DCScrollView;
+			productReference = A15BBBBB1A48842D005D9255 /* libDCScrollView.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A15BBBC51A48842D005D9255 /* DCScrollViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A15BBBD21A48842D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollViewTests" */;
+			buildPhases = (
+				A15BBBC21A48842D005D9255 /* Sources */,
+				A15BBBC31A48842D005D9255 /* Frameworks */,
+				A15BBBC41A48842D005D9255 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A15BBBC91A48842D005D9255 /* PBXTargetDependency */,
+			);
+			name = DCScrollViewTests;
+			productName = DCScrollViewTests;
+			productReference = A15BBBC61A48842D005D9255 /* DCScrollViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A15BBBB31A48842D005D9255 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Hirohisa Kawasaki";
+				TargetAttributes = {
+					A15BBBBA1A48842D005D9255 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					A15BBBC51A48842D005D9255 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = A15BBBB61A48842D005D9255 /* Build configuration list for PBXProject "DCScrollView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A15BBBB21A48842D005D9255;
+			productRefGroup = A15BBBBC1A48842D005D9255 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A15BBBBA1A48842D005D9255 /* DCScrollView */,
+				A15BBBC51A48842D005D9255 /* DCScrollViewTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A15BBBC41A48842D005D9255 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A15BBBB71A48842D005D9255 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A15BBBE01A488480005D9255 /* DCScrollView.m in Sources */,
+				A15BBBDE1A488480005D9255 /* DCScrollView+Logic.m in Sources */,
+				A15BBBE41A488480005D9255 /* DCScrollViewNavigationView.m in Sources */,
+				A15BBBE21A488480005D9255 /* DCScrollViewContentView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A15BBBC21A48842D005D9255 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A15BBBE11A488480005D9255 /* DCScrollView.m in Sources */,
+				A15BBBE31A488480005D9255 /* DCScrollViewContentView.m in Sources */,
+				A15BBBDF1A488480005D9255 /* DCScrollView+Logic.m in Sources */,
+				A15BBBE51A488480005D9255 /* DCScrollViewNavigationView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A15BBBC91A48842D005D9255 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A15BBBBA1A48842D005D9255 /* DCScrollView */;
+			targetProxy = A15BBBC81A48842D005D9255 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A15BBBCD1A48842D005D9255 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A15BBBCE1A48842D005D9255 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A15BBBD01A48842D005D9255 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A15BBBD11A48842D005D9255 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A15BBBD31A48842D005D9255 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DCScrollViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A15BBBD41A48842D005D9255 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DCScrollViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A15BBBB61A48842D005D9255 /* Build configuration list for PBXProject "DCScrollView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A15BBBCD1A48842D005D9255 /* Debug */,
+				A15BBBCE1A48842D005D9255 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A15BBBCF1A48842D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A15BBBD01A48842D005D9255 /* Debug */,
+				A15BBBD11A48842D005D9255 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A15BBBD21A48842D005D9255 /* Build configuration list for PBXNativeTarget "DCScrollViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A15BBBD31A48842D005D9255 /* Debug */,
+				A15BBBD41A48842D005D9255 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A15BBBB31A48842D005D9255 /* Project object */;
+}
