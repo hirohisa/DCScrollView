@@ -65,7 +65,19 @@
                                     target:self
                                     action:@selector(moveToZero)];
 
-    self.navigationItem.rightBarButtonItems = @[buttonItem1, buttonItem2];
+    UIBarButtonItem *buttonItem3 = [[UIBarButtonItem alloc]
+                                    initWithTitle:@"resize"
+                                    style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(resizeScrollView)];
+
+    self.navigationItem.rightBarButtonItems = @[buttonItem1, buttonItem2, buttonItem3];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.scrollView.frame = self.view.bounds;
 }
 
 - (void)moveToZero
@@ -76,6 +88,24 @@
 - (void)reloadData
 {
     [self.scrollView reloadData];
+}
+
+- (void)resizeScrollView
+{
+    if (CGRectGetMaxX(self.scrollView.bounds) == CGRectGetMaxX(self.view.bounds)) {
+        // custom size.
+        self.scrollView.frame = (CGRect) {
+            .origin.x = 0,
+            .origin.y = 0,
+            .size.width = CGRectGetMaxX(self.view.bounds) / 2.0,
+            .size.height = CGRectGetMaxY(self.view.bounds) / 2.0,
+        };
+        self.scrollView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+    } else {
+        // original size.
+        self.scrollView.frame = self.view.bounds;
+        self.scrollView.backgroundColor = [UIColor whiteColor];
+    }
 }
 
 #pragma mark - DCScrollViewDataSource
