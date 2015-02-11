@@ -187,36 +187,14 @@ DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
 - (void)_initialize
 {
     // navigation
-    CGRect frame;
-    frame = (CGRect) {
-        .origin.x = 0,
-        .origin.y = 0,
-        .size.width  = CGRectGetWidth(self.bounds),
-        .size.height = [self sizeOfCellInDCScrollViewNavigationView].height
-    };
-    self.navigationView.frame = frame;
-
-    frame = (CGRect) {
-        .origin.x = 0,
-        .origin.y = 0,
-        .size     = [self sizeOfCellInDCScrollViewNavigationView]
-    };
-    self.navigationView.scrollView.frame = frame;
-
+    [self updateNavigationViewFrame];
     self.navigationView.focusedCenter = self.focusedCenter;
     self.navigationView.delegate = self;
     self.navigationView.dataSource = self;
     [self addSubview:self.navigationView];
 
     // content
-    frame = (CGRect) {
-        .origin.x = 0,
-        .origin.y = CGRectGetMaxY(self.navigationView.frame),
-        .size.width = CGRectGetWidth(self.frame),
-        .size.height = CGRectGetHeight(self.frame) - CGRectGetHeight(self.navigationView.frame)
-    };
-    self.contentView.frame = frame;
-
+    [self updateContentViewFrame];
     self.contentView.delegate = self;
     self.contentView.dataSource = self;
     self.contentView.pagingEnabled = YES;
@@ -270,7 +248,47 @@ DCScrollViewContentViewDelegate, DCScrollViewContentViewDataSource
     [super setFrame:frame];
     if (changeFromZero && [self validateToInitialize]) {
         [self _initialize];
+    } else {
+        [self updateSubviewsFrame];
     }
+}
+
+- (void)updateSubviewsFrame
+{
+    [self updateNavigationViewFrame];
+    [self updateContentViewFrame];
+    [self reloadData];
+}
+
+- (void)updateNavigationViewFrame
+{
+    CGRect frame;
+    frame = (CGRect) {
+        .origin.x = 0,
+        .origin.y = 0,
+        .size.width  = CGRectGetWidth(self.bounds),
+        .size.height = [self sizeOfCellInDCScrollViewNavigationView].height
+    };
+    self.navigationView.frame = frame;
+
+    frame = (CGRect) {
+        .origin.x = 0,
+        .origin.y = 0,
+        .size     = [self sizeOfCellInDCScrollViewNavigationView]
+    };
+    self.navigationView.scrollView.frame = frame;
+}
+
+- (void)updateContentViewFrame
+{
+    CGRect frame;
+    frame = (CGRect) {
+        .origin.x = 0,
+        .origin.y = CGRectGetMaxY(self.navigationView.frame),
+        .size.width = CGRectGetWidth(self.frame),
+        .size.height = CGRectGetHeight(self.frame) - [self sizeOfCellInDCScrollViewNavigationView].height
+    };
+    self.contentView.frame = frame;
 }
 
 - (BOOL)validateToInitialize
