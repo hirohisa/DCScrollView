@@ -11,6 +11,12 @@ Requirements
 - iOS 4.3+
 - ARC
 
+Used in Production
+----------
+
+[ヤフオク!](https://itunes.apple.com/jp/app/yafuoku!-ru-zha-wu-liao!-ri/id356968629?mt=8)
+![ ](DCScrollView Example/yafuoku.png)
+
 Installation
 ----------
 
