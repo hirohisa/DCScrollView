@@ -8,8 +8,8 @@ DCScrollView is an extension of UIScrollView that scrolling through the content,
 
 Requirements
 ----------
-iOS 4.3+
-ARC
+- iOS 4.3+
+- ARC
 
 Installation
 ----------
