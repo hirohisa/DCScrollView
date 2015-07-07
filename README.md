@@ -11,6 +11,8 @@ Requirements
 - iOS 4.3+
 - ARC
 
+If your project's target is iOS 8.0+, use [PageController](https://github.com/hirohisa/PageController). PageController has high performance than DCScrollView. DCScrollView controls [UIView], PageController controls [UIViewController].
+
 Used in Production
 ----------
 
