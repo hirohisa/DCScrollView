@@ -30,7 +30,7 @@ There are two ways to use this in your project:
 - Install with CocoaPods to write Podfile
 ```ruby
 platform :ios
-pod 'DCScrollView',  '~> 1.1.0'
+pod 'DCScrollView'
 ```
 
 
@@ -110,13 +110,6 @@ Example
     return @"title";
 }
 
-```
-
-
-### will deprecate
-
-```objc
-- (void)setFont:(UIFont *)font textColor:(UIColor *)textColor highlightedTextColor:(UIColor *)highlightedTextColor
 ```
 
 ## License
