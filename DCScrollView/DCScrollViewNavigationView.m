@@ -105,7 +105,17 @@
         }
         if ([self.dataSource numberOfCellsInDCScrollViewNavigationView:self] > 1) {
             CGFloat x = CGRectGetWidth(self.scrollView.bounds) * diff;
-            [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x + x, 0) animated:YES];
+            [UIView animateWithDuration:0.2 animations:^{
+                [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x + x, 0) animated:NO];
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    [self renderCells];
+                    [self scrollToCenterWithAnimated:NO];
+                    if ([self.delegate respondsToSelector:@selector(dcscrollViewNavigationViewDidEndScrollingAnimation:)]) {
+                        [self.delegate dcscrollViewNavigationViewDidEndScrollingAnimation:self];
+                    }
+                }
+            }];
         }
         _page = page;
     }
@@ -231,15 +241,6 @@
     [self scrollToCenterWithAnimated:NO];
     if ([self.delegate respondsToSelector:@selector(dcscrollViewNavigationViewDidEndDecelerating:)]) {
         [self.delegate dcscrollViewNavigationViewDidEndDecelerating:self];
-    }
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
-{
-    [self renderCells];
-    [self scrollToCenterWithAnimated:NO];
-    if ([self.delegate respondsToSelector:@selector(dcscrollViewNavigationViewDidEndScrollingAnimation:)]) {
-        [self.delegate dcscrollViewNavigationViewDidEndScrollingAnimation:self];
     }
 }
 
