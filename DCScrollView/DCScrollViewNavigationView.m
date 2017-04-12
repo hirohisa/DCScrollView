@@ -37,7 +37,7 @@
 
 
 @interface DCScrollViewNavigationView () <UIScrollViewDelegate>
-
+@property (nonatomic, assign, readwrite) NSInteger page;
 @end
 
 @implementation DCScrollViewNavigationView
@@ -107,7 +107,7 @@
             CGFloat x = CGRectGetWidth(self.scrollView.bounds) * diff;
             [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x + x, 0) animated:YES];
         }
-        _page = page;
+        self.page = page;
     }
 }
 
@@ -226,7 +226,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     int adjust = (int)([scrollView reservingPage] - [scrollView centerPage]);
-    _page = self.page + adjust;
+    self.page = self.page + adjust;
     [self renderCells];
     [self scrollToCenterWithAnimated:NO];
     if ([self.delegate respondsToSelector:@selector(dcscrollViewNavigationViewDidEndDecelerating:)]) {
