@@ -275,4 +275,18 @@
     [self.delegate dcscrollViewContentViewDidScroll:self];
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if ([self.delegate respondsToSelector:@selector(dcscrollViewContentViewDidEndDecelerating:)]) {
+        [self.delegate dcscrollViewContentViewDidEndDecelerating:self];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    if ([self.delegate respondsToSelector:@selector(dcscrollViewContentViewDidEndScrollingAnimation:)]) {
+        [self.delegate dcscrollViewContentViewDidEndScrollingAnimation:self];
+    }
+}
+
 @end
